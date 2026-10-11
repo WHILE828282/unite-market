@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Project X · Interuniversity Student Rave · Unite Market</title>
+  <meta name="description" content="Project X: the interuniversity student rave. 25 October 2026, 17:00–23:00, JVC, Dubai. 21+ with original ID. Tickets on unite.market." />
+  <meta property="og:title" content="Project X · Interuniversity Student Rave" />
+  <meta property="og:description" content="25 Oct 2026 · 17:00–23:00 · Secret mansion, JVC, Dubai · 21+ · BYOB" />
+  <meta property="og:url" content="https://unite.market" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#05010d" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ["Orbitron", "sans-serif"], sans: ["Inter", "system-ui", "sans-serif"] },
+          colors: { ink: "#05010d", neon: { pink: "#ff2bd6", cyan: "#00f0ff", lime: "#b6ff00", violet: "#8b5cf6" } },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background: #05010d; }
+    .grid-bg { background-image: linear-gradient(rgba(0, 240, 255, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 43, 214, .07) 1px, transparent 1px); background-size: 44px 44px; }
+    .glow-pink { text-shadow: 0 0 8px #ff2bd6, 0 0 28px rgba(255, 43, 214, .6); }
+    .glow-cyan { text-shadow: 0 0 8px #00f0ff, 0 0 28px rgba(0, 240, 255, .55); }
+    .box-pink { box-shadow: 0 0 0 1px rgba(255, 43, 214, .6), 0 0 30px -6px rgba(255, 43, 214, .7); }
+    .box-cyan { box-shadow: 0 0 0 1px rgba(0, 240, 255, .6), 0 0 30px -6px rgba(0, 240, 255, .7); }
+    .glitch { position: relative; }
+    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; }
+    .glitch::before { color: #00f0ff; transform: translate(2px, 0); clip-path: inset(0 0 55% 0); animation: gl1 3s infinite steps(1); opacity: .8; }
+    .glitch::after { color: #ff2bd6; transform: translate(-2px, 0); clip-path: inset(55% 0 0 0); animation: gl2 2.4s infinite steps(1); opacity: .8; }
+    @keyframes gl1 { 0%, 92% { transform: translate(2px, 0); } 94% { transform: translate(-4px, -1px); } 97% { transform: translate(5px, 1px); } }
+    @keyframes gl2 { 0%, 90% { transform: translate(-2px, 0); } 93% { transform: translate(4px, 1px); } 96% { transform: translate(-5px, -1px); } }
+    .scan::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .03) 0 1px, transparent 1px 3px); }
+    @media (prefers-reduced-motion: reduce) { .glitch::before, .glitch::after { animation: none; } }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden font-sans text-white antialiased">
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <a href="/" class="font-display text-lg font-extrabold tracking-widest">UNITE<span class="text-neon-pink">.</span>MARKET</a>
+      <nav class="flex items-center gap-4 text-sm">
+        <a href="#details" class="hidden text-white/70 hover:text-white sm:inline">Details</a>
+        <a href="#tickets" class="hidden text-white/70 hover:text-white sm:inline">Tickets</a>
+        <a href="#rules" class="hidden text-white/70 hover:text-white sm:inline">Entry rules</a>
+        <a href="#tickets" class="rounded-full bg-neon-pink px-4 py-2 font-semibold text-ink hover:bg-white">Get tickets</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero + countdown -->
+    <section class="scan relative overflow-hidden">
+      <div class="grid-bg absolute inset-0"></div>
+      <div class="absolute -left-32 top-10 h-80 w-80 rounded-full bg-neon-pink/30 blur-3xl"></div>
+      <div class="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-neon-cyan/25 blur-3xl"></div>
+      <div class="relative mx-auto max-w-6xl px-4 pb-20 pt-16 text-center sm:pt-24">
+        <p class="inline-flex items-center gap-2 rounded-full border border-neon-cyan/40 px-3 py-1 text-xs font-semibold uppercase tracking-[.25em] text-neon-cyan">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-neon-lime"></span> Interuniversity student rave
+        </p>
+        <h1 class="glitch glow-pink mt-6 font-display text-6xl font-black tracking-tight sm:text-8xl" data-text="PROJECT X">PROJECT X</h1>
+        <p class="mx-auto mt-5 max-w-xl text-base text-white/75 sm:text-lg">
+          AUD · Middlesex · Heriot-Watt · UOWD and more. One night, one secret mansion, 500 students.
+        </p>
+        <p class="mt-3 font-display text-sm tracking-[.3em] text-neon-cyan glow-cyan">25.10.2026 · 17:00 – 23:00 · JVC, DUBAI</p>
+
+        <div id="countdown" class="mx-auto mt-10 grid max-w-xl grid-cols-4 gap-2 sm:gap-4" aria-live="polite">
+          <div class="box-pink rounded-2xl bg-white/5 py-4"><p data-cd="d" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Days</p></div>
+          <div class="box-pink rounded-2xl bg-white/5 py-4"><p data-cd="h" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Hours</p></div>
+          <div class="box-cyan rounded-2xl bg-white/5 py-4"><p data-cd="m" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Min</p></div>
+          <div class="box-cyan rounded-2xl bg-white/5 py-4"><p data-cd="s" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Sec</p></div>
+        </div>
+
+        <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="#tickets" class="w-full rounded-xl bg-neon-pink px-8 py-4 font-display text-sm font-extrabold tracking-widest text-ink hover:bg-white sm:w-auto">BUY TICKETS</a>
+          <a href="#rules" class="w-full rounded-xl border border-white/20 px-8 py-4 text-sm font-semibold text-white/80 hover:border-white hover:text-white sm:w-auto">21+ · Original ID · BYOB</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event details -->
+    <section id="details" class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="font-display text-2xl font-extrabold tracking-widest sm:text-3xl">THE <span class="text-neon-cyan">DETAILS</span></h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+          <p class="text-xs uppercase tracking-widest text-neon-pink">Date</p>
+          <p class="mt-2 text-xl font-bold">Sunday, 25 October 2026</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+          <p class="text-xs uppercase tracking-widest text-neon-pink">Time</p>
+          <p class="mt-2 text-xl font-bold">17:00 – 23:00</p>
+          <p class="mt-1 text-sm text-white/60">Last entry 21:00 · Gulf Standard Time</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+          <p class="text-xs uppercase tracking-widest text-neon-pink">Location</p>
+          <p class="mt-2 text-xl font-bold">Secret Mansion, JVC</p>
+          <p class="mt-1 text-sm text-white/60">Exact pin sent to ticket holders by email 24 h before</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
+          <p class="text-xs uppercase tracking-widest text-neon-pink">Capacity</p>
+          <p class="mt-2 text-xl font-bold">500 guests</p>
+          <p class="mt-1 text-sm text-white/60">Hard cap · no tickets at the door</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="tickets" class="relative">
+      <div class="grid-bg absolute inset-0 opacity-50"></div>
+      <div class="relative mx-auto max-w-6xl px-4 py-16">
+        <h2 class="font-display text-2xl font-extrabold tracking-widest sm:text-3xl">GET <span class="text-neon-pink">TICKETS</span></h2>
+        <p class="mt-2 text-white/60">One ticket, one person. Prices in UAE dirhams (AED). Apple Pay, Google Pay and cards accepted.</p>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <article class="box-cyan flex flex-col rounded-3xl bg-ink/90 p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <h3 class="font-display text-xl font-extrabold tracking-widest text-neon-cyan">GENTS</h3>
+                <p class="mt-1 text-sm text-white/60">General admission · 21+</p>
+              </div>
+              <span class="rounded-full border border-neon-cyan/50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-neon-cyan">Limited</span>
+            </div>
+            <p class="mt-6 font-display text-5xl font-black">100 <span class="text-lg font-semibold text-white/60">AED</span></p>
+            <ul class="mt-6 space-y-2 text-sm text-white/80">
+              <li>▸ Entry 17:00 – 21:00, party till 23:00</li>
+              <li>▸ Digital QR ticket by email</li>
+              <li>▸ BYOB: bring your own drinks (21+ only)</li>
+            </ul>
+            <button type="button" data-tier="gents" class="tier-btn mt-8 rounded-xl bg-neon-cyan py-3.5 font-display text-sm font-extrabold tracking-widest text-ink hover:bg-white">SELECT GENTS</button>
+          </article>
+
+          <article class="box-pink flex flex-col rounded-3xl bg-ink/90 p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <h3 class="font-display text-xl font-extrabold tracking-widest text-neon-pink">LADIES</h3>
+                <p class="mt-1 text-sm text-white/60">General admission · 21+</p>
+              </div>
+              <span class="rounded-full border border-neon-pink/50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-neon-pink">Limited</span>
+            </div>
+            <p class="mt-6 font-display text-5xl font-black">50 <span class="text-lg font-semibold text-white/60">AED</span></p>
+            <ul class="mt-6 space-y-2 text-sm text-white/80">
+              <li>▸ Entry 17:00 – 21:00, party till 23:00</li>
+              <li>▸ Digital QR ticket by email</li>
+              <li>▸ BYOB: bring your own drinks (21+ only)</li>
+            </ul>
+            <button type="button" data-tier="ladies" class="tier-btn mt-8 rounded-xl bg-neon-pink py-3.5 font-display text-sm font-extrabold tracking-widest text-ink hover:bg-white">SELECT LADIES</button>
+          </article>
+        </div>
+
+        <p class="mt-6 text-sm text-white/60">UOWD student? Sign in on <a href="https://www.uniteuow.com" class="text-neon-cyan underline underline-offset-4">uniteuow.com</a> with your @uowdubai.ac.ae email for 50% off.</p>
+
+        <!-- Checkout: Blend white-label widget. See docs/CTO-GUIDE.md, section 2. -->
+        <div id="checkout" class="mt-10 scroll-mt-24">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-white/50">Secure checkout · <span id="tier-label">choose a ticket above</span></p>
+          <div id="blend-checkout"
+               data-blend-src=""
+               class="relative flex min-h-[520px] items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-neon-violet/60 bg-white/[.02]">
+            <div id="blend-placeholder" class="px-6 text-center">
+              <p class="font-display text-lg font-extrabold tracking-widest text-neon-violet">BLEND CHECKOUT</p>
+              <p class="mx-auto mt-2 max-w-sm text-sm text-white/60">The ticket checkout loads here. Payments are processed securely by Stripe through Blend; card details never touch unite.market.</p>
+            </div>
+          </div>
+          <label class="mt-4 flex items-start gap-3 text-sm text-white/70">
+            <input id="agree" type="checkbox" class="mt-0.5 h-4 w-4 shrink-0 accent-pink-500" />
+            <span>I am 21 or older, I will bring my original physical ID, and I agree to the <a href="/terms" class="text-neon-cyan underline underline-offset-4">Terms &amp; Conditions</a> and the <a href="/refunds" class="text-neon-cyan underline underline-offset-4">Refund &amp; Cancellation Policy</a>.</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Entry rules -->
+    <section id="rules" class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="font-display text-2xl font-extrabold tracking-widest sm:text-3xl">ENTRY <span class="text-neon-lime">RULES</span></h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-neon-lime/30 bg-white/[.03] p-5">
+          <p class="font-display text-3xl font-black text-neon-lime">21+</p>
+          <p class="mt-2 text-sm text-white/75">Strictly 21 and over. Bring your <b>original</b> Emirates ID, passport or UAE driving licence. Photos, copies and digital IDs are refused.</p>
+        </div>
+        <div class="rounded-2xl border border-neon-lime/30 bg-white/[.03] p-5">
+          <p class="font-display text-3xl font-black text-neon-lime">BYOB</p>
+          <p class="mt-2 text-sm text-white/75">No drinks are sold. Guests 21+ may bring sealed drinks for personal use only. No glass on the pool deck. Bags are checked at the door.</p>
+        </div>
+        <div class="rounded-2xl border border-neon-lime/30 bg-white/[.03] p-5">
+          <p class="font-display text-3xl font-black text-neon-lime">ZERO</p>
+          <p class="mt-2 text-sm text-white/75">Zero tolerance for drugs, weapons, harassment or fake ID. Breaking the rules means removal without refund; illegal acts are reported to Dubai Police.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-black/40">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-white/60 md:flex-row md:items-start md:justify-between">
+      <div>
+        <p class="font-display font-extrabold tracking-widest text-white">UNITE<span class="text-neon-pink">.</span>MARKET</p>
+        <p class="mt-2">Operated by [LEGAL ENTITY NAME], [TRADE LICENCE NO.], Dubai, United Arab Emirates.</p>
+        <p class="mt-1">Support: <a href="mailto:support@unite.market" class="text-white/80 hover:text-white">support@unite.market</a> · [PHONE / WHATSAPP]</p>
+        <p class="mt-1">All prices in AED. © 2026 Unite.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Legal">
+        <a href="/terms" class="hover:text-white">Terms &amp; Conditions</a>
+        <a href="/refunds" class="hover:text-white">Refund &amp; Cancellation</a>
+        <a href="/privacy" class="hover:text-white">Privacy Policy</a>
+        <a href="mailto:support@unite.market" class="hover:text-white">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Countdown to 25 Oct 2026, 17:00 Gulf Standard Time (UTC+4).
+    (function () {
+      var target = Date.parse("2026-10-25T17:00:00+04:00");
+      var el = function (k) { return document.querySelector('[data-cd="' + k + '"]'); };
+      var pad = function (n) { return String(n).padStart(2, "0"); };
+      function tick() {
+        var left = Math.max(0, target - Date.now());
+        el("d").textContent = pad(Math.floor(left / 864e5));
+        el("h").textContent = pad(Math.floor(left / 36e5) % 24);
+        el("m").textContent = pad(Math.floor(left / 6e4) % 60);
+        el("s").textContent = pad(Math.floor(left / 1e3) % 60);
+        if (!left) { clearInterval(timer); document.getElementById("countdown").setAttribute("aria-label", "The event has started"); }
+      }
+      var timer = setInterval(tick, 1000); tick();
+    })();
+
+    // Ticket choice -> loads the Blend checkout for that tier once the buyer has ticked the 21+ / terms box.
+    // Paste the Blend checkout URLs here (see docs/CTO-GUIDE.md, section 2). Only https://*.blendapp.ai URLs are accepted.
+    (function () {
+      var BLEND = { gents: "", ladies: "" };
+      var NAMES = { gents: "Gents · 100 AED", ladies: "Ladies · 50 AED" };
+      var tier = null;
+      var box = document.getElementById("blend-checkout");
+      var agree = document.getElementById("agree");
+      var safe = function (u) { try { var x = new URL(u); return x.protocol === "https:" && /(^|\.)blendapp\.ai$/.test(x.hostname); } catch (e) { return false; } };
+
+      function load() {
+        if (!tier) return;
+        document.getElementById("tier-label").textContent = NAMES[tier];
+        var src = BLEND[tier] || box.getAttribute("data-blend-src");
+        if (!agree.checked) return setNote("Tick the 21+ and terms box below to continue.");
+        if (!src || !safe(src)) return setNote("Checkout opens soon. Follow us for the ticket drop.");
+        var f = document.createElement("iframe");
+        f.src = src;
+        f.title = "Project X tickets: secure checkout by Blend";
+        f.allow = "payment *";
+        f.referrerPolicy = "strict-origin-when-cross-origin";
+        f.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation");
+        f.loading = "lazy";
+        f.className = "absolute inset-0 h-full w-full border-0 bg-white";
+        box.replaceChildren(f);
+        box.classList.remove("border-dashed");
+      }
+      function setNote(t) {
+        box.innerHTML = '<p class="px-6 text-center text-sm text-white/70"></p>';
+        box.firstChild.textContent = t;
+      }
+      document.querySelectorAll(".tier-btn").forEach(function (b) {
+        b.addEventListener("click", function () { tier = b.getAttribute("data-tier"); load(); document.getElementById("checkout").scrollIntoView({ behavior: "smooth" }); });
+      });
+      agree.addEventListener("change", load);
+    })();
+  </script>
+</body>
+</html>
