@@ -2,7 +2,7 @@
    charges these prices, so the browser can never change a price.
    Each ticket type uses up places from one or more pools: every ticket from "event" (people at the door),
    Early Bird tickets also from "early". Group of 4 takes 4 places. */
-export const EVENT = { id: "project-x", name: "Project X", when: "Sunday, 25 October 2026 · 8:00 PM – 2:00 AM", where: "Private villa, JVC, Dubai" };
+export const EVENT = { id: "project-x", name: "Project X", when: "Sunday, 25 October 2026 · 8:00 PM – 2:00 AM", where: "Private villa, Dubai" };
 
 export const POOLS = { event: 1000, early: 100 };
 
