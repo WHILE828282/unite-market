@@ -31,3 +31,7 @@ button, a, label, input { touch-action: manipulation; }
 .dark .legal a { color: #e9b6bc; }
 @keyframes uSpin { to { transform: rotate(360deg); } }
 .u-spin { animation: uSpin .8s linear infinite; }
+
+/* Light theme greys, as on uniteuow.com: tiles and chips a shade darker than the page so they stay visible. */
+html:not(.dark) .bg-slate-100 { background-color: #e9e9ee; }
+html:not(.dark) .bg-slate-50 { background-color: #f2f2f7; }
