@@ -8,8 +8,10 @@ Static HTML + Tailwind CDN in the uniteuow.com style (navy/crimson palette, Unit
 - `terms.html`, `refunds.html`, `privacy.html`: legal pages (`/terms`, `/refunds`, `/privacy`)
 - `theme.js`, `site.css`: shared Tailwind config (Unite palette), theme toggle and base styles
 - `icons/`: Unite Market logo (`market-icon.jpg`, 1024 px original) and favicons
-- `success.html`: page after payment with the QR ticket
-- `api/`: stock, checkout (15-minute hold), Stripe webhook, order status, QR image, guest list CSV; catalog and prices in `api/_tickets.js`
+- `success.html`: page after payment with one Unite-style QR ticket per person
+- `door.html`: door check-in (camera scanner, guest list), behind `DOOR_KEY`
+- `vendor/jsQR.js`: QR reader for phones without a built-in one
+- `api/`: stock, checkout (15-minute hold), Stripe webhook, order status, QR image, door check-in, guest list CSV; catalog and prices in `api/_tickets.js`
 - `vercel.json`: clean URLs and security headers
 - `docs/CTO-GUIDE.md`: launch blockers, DNS, Stripe/Neon/Resend setup, UOWD discount logic
 

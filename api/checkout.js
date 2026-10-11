@@ -3,14 +3,14 @@
 import { EVENT, HOLD_MINUTES, TYPES, readCart, lineName } from "./_tickets.js";
 import { dbConfigured, ensureSchema, holdOrder, setSession, setStatus, getOrder, sweepHolds } from "./_db.js";
 import { stripeOn, stripe, expireSession } from "./_stripe.js";
-import { newId } from "./_ticket.js";
+import { newId, ticketsReady } from "./_ticket.js";
 import { body, origin, methodOk } from "./_http.js";
 
 export default async function handler(req, res) {
   if (!methodOk(req, res, ["POST"])) return;
   res.setHeader("Cache-Control", "no-store");
   const fail = (error, status = 400) => res.status(status).json({ ok: false, error });
-  if (!dbConfigured() || !stripeOn()) return fail("Ticket sales open soon.", 503);
+  if (!dbConfigured() || !stripeOn() || !ticketsReady()) return fail("Ticket sales open soon.", 503);
   const b = body(req);
 
   try {

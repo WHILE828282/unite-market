@@ -64,16 +64,19 @@ How it works:
 3. Only the Stripe webhook marks an order **paid**. Opening the payment page and leaving never counts as a sale.
 4. If the buyer doesn't pay within 15 minutes, the hold ends, the tickets go back on sale and the Stripe page is closed. Coming back with the Back button frees them at once.
 5. A payment that arrives after the hold ended still gets its tickets if places are free; if they were sold meanwhile, it is refunded automatically.
-6. Paid orders get an email with a QR code (Resend) and see it on `/success`.
+6. Every person gets their own ticket (`UNT-2026-XXXXX`, QR `U1.<id>.<signature>`, the same format as uniteuow.com). Group of 4 = 4 tickets. They arrive by email (Resend) and on `/success`, drawn like the Unite app ticket.
+7. **At the door** staff open `https://unite.market/door`, enter the door key and scan with the phone camera, like the Unite host scanner: green **Checked in** with the guest's name and ticket type, red **Already used** with the time they came in, or red **Invalid**. Each check-in is saved with its time; the guest list can be searched and checked in by hand. Several phones can scan at once.
 
 Setup:
 1. **Neon:** Vercel → project → **Storage → Create → Neon Postgres** (or connect the Unite database). This sets `DATABASE_URL`. The `orders` table is created on the first request.
 2. **Stripe keys:** Stripe → Developers → API keys → copy the **Secret key** into `STRIPE_SECRET_KEY`. Start with the test key (`sk_test_…`), switch to live (`sk_live_…`) when testing is done.
 3. **Stripe webhook:** Stripe → Developers → Webhooks → **Add endpoint** → `https://unite.market/api/stripe-webhook`, events `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.expired`. Copy the signing secret into `STRIPE_WEBHOOK_SECRET`. Test and live mode each have their own webhook and secret.
 4. **Ticket email:** `RESEND_API_KEY` (the same key as uniteuow.com). Optional `TICKET_FROM`, default `Unite Tickets <tickets@uniteuow.com>`.
-5. **Guest list:** set `ADMIN_KEY` to a long random string. `https://unite.market/api/orders?key=…` downloads all paid orders as CSV (names, emails, phones, tickets, how many people, QR code).
-6. Optional: `TICKET_SECRET` (signs the QR codes; defaults to the Stripe key, so set it before going live so codes don't change when the key does) and `SITE_URL=https://unite.market`.
-7. Redeploy after adding the variables.
+5. **Ticket signing:** set `TICKET_SECRET` to a long random string (`openssl rand -hex 32`). It signs every QR code; don't change it after sales start or old QR codes stop scanning. Ticket sales stay closed until it is set.
+6. **Door:** set `DOOR_KEY` to a password for the door staff (they type it on `/door`).
+7. **Guest list:** set `ADMIN_KEY` to a long random string. `https://unite.market/api/orders?key=…` downloads every ticket as CSV (name, email, phone, type, price, check-in time, order).
+8. Optional: `SITE_URL=https://unite.market`.
+9. Redeploy after adding the variables.
 
 Changing tickets: edit `api/_tickets.js`: prices, the pools (`event: 1000` places at the door, `early: 100` Early Bird tickets) and the ticket types. Changes apply to new orders only.
 

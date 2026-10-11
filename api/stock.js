@@ -2,13 +2,14 @@
    Also closes holds older than 15 minutes, so places come back on their own. */
 import { GROUPS, POOLS, MAX_PER_ORDER, HOLD_MINUTES, typesLeft } from "./_tickets.js";
 import { dbConfigured, ensureSchema, poolsLeft, sweepHolds } from "./_db.js";
+import { ticketsReady } from "./_ticket.js";
 import { stripeOn, expireSession } from "./_stripe.js";
 import { methodOk } from "./_http.js";
 
 export default async function handler(req, res) {
   if (!methodOk(req, res, ["GET"])) return;
   res.setHeader("Cache-Control", "no-store");
-  const live = dbConfigured() && stripeOn();
+  const live = dbConfigured() && stripeOn() && ticketsReady();
   let left = null, pools = null;
   if (live) {
     try {

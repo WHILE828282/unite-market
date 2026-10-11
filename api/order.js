@@ -1,5 +1,5 @@
 /* GET /api/order?id=ORDER -> status of one order for the success page (the id is the secret). */
-import { dbConfigured, ensureSchema, getOrder } from "./_db.js";
+import { dbConfigured, ensureSchema, getOrder, orderTickets } from "./_db.js";
 import { lineName } from "./_tickets.js";
 import { people } from "./_ticket.js";
 import { methodOk } from "./_http.js";
@@ -20,6 +20,6 @@ export default async function handler(req, res) {
     lines: Object.entries(o.items).map(([tid, q]) => `${lineName(tid)} × ${q}`),
     admits: people(o.items),
     email: o.status === "paid" ? o.email : null,
-    code: o.status === "paid" ? o.ticket_code : null,
+    tickets: o.status === "paid" ? (await orderTickets(id)).map((t) => ({ id: t.id, code: t.code, label: t.label, name: t.name, checkedIn: t.checked_in_at, refunded: t.status !== "valid" })) : [],
   });
 }

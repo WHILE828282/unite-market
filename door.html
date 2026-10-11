@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Door check-in · Unite</title>
+  <meta name="description" content="Project X door check-in." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/theme.js"></script>
+  <script src="/icons.js"></script>
+</head>
+<body class="min-h-screen bg-[#f2f2f7] text-slate-900 dark:bg-black dark:text-[#f5f5f7]">
+
+  <header class="u-header u-safe-top sticky top-0 z-30 border-b border-[rgba(110,90,70,0.14)] dark:border-white/10">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <a href="/" aria-label="Unite home" class="flex items-center gap-2.5 rounded-lg">
+        <img src="/icons/market-icon-128.webp" alt="" width="36" height="36" class="h-10 w-10 shrink-0 rounded-[22%] ring-1 ring-white/15" />
+        <span class="text-xl font-extrabold tracking-tight text-[#0f172a] dark:text-white">unite</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <button type="button" data-theme-toggle role="switch" aria-label="Dark mode" title="Switch theme"
+          class="u-toggle u-btn relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-sm ring-1 ring-slate-200 hover:text-slate-900 dark:bg-white/[0.08] dark:text-slate-200 dark:shadow-none dark:ring-white/[0.12] dark:hover:text-white">
+          <span class="u-moon absolute inset-0 flex items-center justify-center">
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </span>
+          <span class="u-sun absolute inset-0 flex items-center justify-center">
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </span>
+        </button>
+        <a href="/#tickets" class="u-btn inline-flex h-10 items-center rounded-full bg-crimson-700 px-4 text-sm font-semibold text-white hover:bg-crimson-600">Tickets</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-lg space-y-4 px-4 py-8">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Check-in</p>
+      <h1 class="mt-1 text-xl font-bold leading-tight">Project X</h1>
+      <p class="mt-0.5 text-sm text-slate-500 dark:text-slate-400">Sunday, 25 October · 8:00 PM</p>
+    </div>
+
+    <!-- Door key -->
+    <form id="login" class="hidden space-y-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+      <label for="key" class="text-sm font-semibold">Door key</label>
+      <input id="key" type="password" autocomplete="current-password" required class="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:border-slate-400 focus:outline-none dark:border-white/10 dark:bg-[#121214]" />
+      <p id="login-err" class="hidden text-sm text-rose-600"></p>
+      <button class="u-btn w-full rounded-xl bg-crimson-700 py-3 text-sm font-semibold text-white dark:bg-white dark:text-black">Open check-in</button>
+    </form>
+
+    <div id="app" class="hidden space-y-4">
+      <div class="rounded-2xl border border-slate-200/80 bg-white p-4 text-sm dark:border-white/[0.07] dark:bg-[#1c1c1e]">
+        <div class="flex items-center justify-between"><p class="font-semibold"><span id="in">0</span> checked in</p><p class="text-slate-500 dark:text-slate-400"><span id="sold">0</span> tickets</p></div>
+        <div class="mt-2 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-[#2c2c2e]"><div id="bar" class="h-full w-0 rounded-full bg-emerald-500" style="transition: width .4s ease"></div></div>
+      </div>
+
+      <div id="cam" class="hidden space-y-2">
+        <div class="relative overflow-hidden rounded-2xl bg-black" style="aspect-ratio: 1 / 1">
+          <video id="video" muted playsinline class="absolute inset-0 h-full w-full object-cover"></video>
+          <span class="pointer-events-none absolute inset-[18%] rounded-3xl ring-4 ring-white/80" aria-hidden="true"></span>
+        </div>
+        <button id="stop" type="button" class="u-btn w-full rounded-xl py-2.5 text-sm font-semibold text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 dark:text-slate-300 dark:ring-white/10">Close camera</button>
+      </div>
+      <button id="start" type="button" class="u-btn flex w-full items-center justify-center gap-2 rounded-xl bg-crimson-700 py-3 text-sm font-semibold text-white dark:bg-white dark:text-black"><i data-icon="ticket" class="h-4 w-4"></i> Scan tickets with the camera</button>
+      <p id="cam-err" class="hidden rounded-xl bg-amber-50 px-3 py-2.5 text-sm text-amber-800 ring-1 ring-inset ring-amber-200 dark:bg-amber-500/10 dark:text-amber-200 dark:ring-amber-500/30"></p>
+
+      <div id="flash" role="status" class="hidden"></div>
+
+      <div>
+        <label for="q" class="sr-only">Search guests</label>
+        <input id="q" type="search" enterkeyhint="search" placeholder="Search by name, email or ticket ID" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:border-slate-400 focus:outline-none dark:border-white/10 dark:bg-[#1c1c1e]" />
+        <ul id="list" class="mt-2 divide-y divide-slate-200/70 dark:divide-white/[0.07]"></ul>
+        <p id="empty" class="mt-3 hidden text-center text-sm text-slate-500 dark:text-slate-400"></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/vendor/jsQR.js" defer></script>
+  <script>
+    (function () {
+      var $ = function (s) { return document.querySelector(s); };
+      var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+      var clock = function (v) { return new Date(v).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Dubai" }); };
+      var KEY = "";
+      try { KEY = sessionStorage.getItem("px-door") || ""; } catch (e) {}
+      var list = [], recent = {}, flashTimer, stream, timer, scanning = false;
+
+      function api(method, data) {
+        var url = "/api/door" + (method === "GET" ? "?key=" + encodeURIComponent(KEY) : "");
+        return fetch(url, method === "GET" ? { cache: "no-store" } : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.assign({ key: KEY }, data)) })
+          .then(function (r) { return r.json().then(function (j) { if (r.status === 403) throw new Error("key"); return j; }); });
+      }
+      function load() {
+        return api("GET").then(function (j) {
+          if (!j.ok) throw new Error(j.error || "Couldn't load guests.");
+          list = j.tickets; render();
+          $("#login").classList.add("hidden"); $("#app").classList.remove("hidden");
+        });
+      }
+      function render() {
+        var sold = list.filter(function (t) { return !t.refunded; }).length, inn = list.filter(function (t) { return t.checkedIn; }).length;
+        $("#in").textContent = inn; $("#sold").textContent = sold;
+        $("#bar").style.width = (sold ? inn / sold * 100 : 0) + "%";
+        var term = $("#q").value.trim().toLowerCase();
+        var shown = list.filter(function (t) { return !term || [t.name, t.email, t.id, t.label].some(function (v) { return String(v || "").toLowerCase().indexOf(term) >= 0; }); });
+        $("#list").innerHTML = shown.slice(0, 300).map(function (t) {
+          return '<li class="flex items-center gap-3 py-3"><div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">' + esc(t.name || t.email || "Guest") + '</p>' +
+            '<p class="truncate text-xs text-slate-500 dark:text-slate-400">' + esc(t.label) + " · " + esc(t.id) + "</p></div>" +
+            (t.refunded ? '<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500 dark:bg-[#2c2c2e]">Refunded</span>'
+              : t.checkedIn ? '<span class="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-500/30">In · ' + clock(t.checkedIn) + "</span>"
+              : '<button type="button" data-id="' + esc(t.id) + '" class="u-btn rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 dark:text-slate-200 dark:ring-white/10">Check in</button>') + "</li>";
+        }).join("");
+        $("#empty").textContent = list.length ? "No one matches that search." : "No tickets sold yet.";
+        $("#empty").classList.toggle("hidden", shown.length > 0);
+      }
+      function show(tone, title, text) {
+        var f = $("#flash");
+        f.className = "u-rise flex items-center gap-3 rounded-2xl px-4 py-3 text-white " + (tone === "ok" ? "bg-emerald-600" : "bg-rose-600");
+        f.innerHTML = '<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-bold">' + (tone === "ok" ? "✓" : "✕") + '</span><span class="min-w-0"><span class="block font-bold">' + esc(title) + '</span><span class="block truncate text-sm text-white/90">' + esc(text) + "</span></span>";
+        clearTimeout(flashTimer); flashTimer = setTimeout(function () { f.className = "hidden"; }, 3500);
+      }
+      function result(r) {
+        if (!r.ok) return show("bad", "Couldn't check in", r.error || "Try again.");
+        var a = r.attendee, who = a ? (a.name || a.email || "Guest") + " · " + a.label : "";
+        if (a) list = list.map(function (t) { return t.id === a.id ? a : t; });
+        if (r.result === "ok") show("ok", "Checked in", who);
+        else if (r.result === "used") show("bad", "Already used", who + (a && a.checkedIn ? " · in at " + clock(a.checkedIn) : ""));
+        else show("bad", "Invalid", r.reason || "Not a ticket for this event.");
+        render();
+      }
+      function onCode(code) {
+        var now = Date.now();
+        if (recent[code] && now - recent[code] < 4000) return; // same code still in front of the camera
+        recent[code] = now;
+        if (navigator.vibrate) navigator.vibrate(60);
+        api("POST", { code: code }).then(result).catch(function () { show("bad", "Couldn't check in", "Check the connection and try again."); });
+      }
+
+      // Camera: BarcodeDetector where the browser has it, otherwise jsQR on video frames (same as Unite).
+      function startCam() {
+        var v = $("#video"), err = $("#cam-err");
+        err.classList.add("hidden");
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { err.textContent = "This browser can't use the camera. Use the guest list below."; return err.classList.remove("hidden"); }
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false }).then(function (s) {
+          stream = s; v.srcObject = s; v.setAttribute("playsinline", ""); return v.play();
+        }).then(function () {
+          $("#cam").classList.remove("hidden"); $("#start").classList.add("hidden"); scanning = true;
+          var detect;
+          if ("BarcodeDetector" in window) {
+            try { var bd = new window.BarcodeDetector({ formats: ["qr_code"] }); detect = function () { return bd.detect(v).then(function (r) { return r[0] && r[0].rawValue; }); }; } catch (e) { detect = null; }
+          }
+          if (!detect) {
+            var c = document.createElement("canvas"), g = c.getContext("2d", { willReadFrequently: true });
+            detect = function () {
+              if (!v.videoWidth || !window.jsQR) return Promise.resolve(null);
+              var k = Math.min(1, 720 / Math.max(v.videoWidth, v.videoHeight));
+              c.width = Math.round(v.videoWidth * k); c.height = Math.round(v.videoHeight * k);
+              g.drawImage(v, 0, 0, c.width, c.height);
+              var r = window.jsQR(g.getImageData(0, 0, c.width, c.height).data, c.width, c.height, { inversionAttempts: "dontInvert" });
+              return Promise.resolve(r && r.data);
+            };
+          }
+          (function tick() {
+            if (!scanning) return;
+            detect().then(function (code) { if (code) onCode(code); }).catch(function () {}).then(function () { timer = setTimeout(tick, 250); });
+          })();
+        }).catch(function (e) {
+          err.textContent = e && e.name === "NotAllowedError" ? "Camera access was blocked. Allow the camera for this site in your browser settings, or use the guest list below." : "Couldn't start the camera.";
+          err.classList.remove("hidden");
+        });
+      }
+      function stopCam() {
+        scanning = false; clearTimeout(timer);
+        if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+        $("#cam").classList.add("hidden"); $("#start").classList.remove("hidden");
+      }
+
+      $("#start").addEventListener("click", startCam);
+      $("#stop").addEventListener("click", stopCam);
+      $("#q").addEventListener("input", render);
+      $("#list").addEventListener("click", function (e) {
+        var b = e.target.closest("[data-id]"); if (!b) return;
+        b.disabled = true;
+        api("POST", { id: b.getAttribute("data-id") }).then(result).catch(function () { b.disabled = false; });
+      });
+      $("#login").addEventListener("submit", function (e) {
+        e.preventDefault();
+        KEY = $("#key").value.trim();
+        load().then(function () { try { sessionStorage.setItem("px-door", KEY); } catch (e) {} }).catch(function (err) {
+          $("#login-err").textContent = err.message === "key" ? "Wrong door key." : err.message;
+          $("#login-err").classList.remove("hidden");
+        });
+      });
+      // Keep the list fresh when several phones scan at once.
+      setInterval(function () { if (KEY && !$("#app").classList.contains("hidden")) load().catch(function () {}); }, 15000);
+
+      if (KEY) load().catch(function () { KEY = ""; $("#login").classList.remove("hidden"); });
+      else $("#login").classList.remove("hidden");
+    })();
+  </script>
+
+  <footer class="border-t border-slate-200/80 dark:border-white/10">
+    <div class="mx-auto flex max-w-5xl flex-col gap-5 px-4 py-8 text-sm text-slate-500 dark:text-slate-400 md:flex-row md:items-start md:justify-between">
+      <div>
+        <p class="flex items-center gap-2 font-extrabold tracking-tight text-slate-900 dark:text-white"><img src="/icons/market-icon-128.webp" alt="" class="h-6 w-6 rounded-[22%]" /> unite</p>
+        <p class="mt-2">Operated by Unite, Dubai, United Arab Emirates.</p>
+        <p class="mt-1">Support: <a href="mailto:support@uniteuow.com" class="hover:text-slate-900 dark:hover:text-white">support@uniteuow.com</a> · <a href="https://wa.me/971541493969" class="hover:text-slate-900 dark:hover:text-white">WhatsApp +971 54 149 3969</a></p>
+        <p class="mt-1">All prices in AED. © 2026 Unite.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Legal">
+        <a href="/terms" class="hover:text-slate-900 dark:hover:text-white">Terms &amp; Conditions</a>
+        <a href="/refunds" class="hover:text-slate-900 dark:hover:text-white">Refund &amp; Cancellation</a>
+        <a href="/privacy" class="hover:text-slate-900 dark:hover:text-white">Privacy Policy</a>
+        <a href="mailto:support@uniteuow.com" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

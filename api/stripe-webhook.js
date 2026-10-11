@@ -2,9 +2,9 @@
    Events: checkout.session.completed, checkout.session.async_payment_succeeded, checkout.session.expired.
    A ticket counts as sold only here, when Stripe confirms the money. If the hold ran out and the places are
    gone by then, the payment is refunded automatically. */
-import { dbConfigured, ensureSchema, getOrder, markPaid, setStatus, markEmailed } from "./_db.js";
+import { dbConfigured, ensureSchema, getOrder, markPaid, setStatus, markEmailed, addTickets } from "./_db.js";
 import { verifyWebhook, refund } from "./_stripe.js";
-import { ticketCode, sendTicket } from "./_ticket.js";
+import { makeTickets, newTicketId, ticketCode, sendTicket } from "./_ticket.js";
 import { origin } from "./_http.js";
 
 // Raw body is needed for the signature; Vercel only parses req.body when it is read, so read the stream instead.
@@ -40,14 +40,15 @@ export default async function handler(req, res) {
     if (order.status === "paid" || order.status === "refunded") return res.status(200).json({ ok: true, already: order.status });
 
     const d = s.customer_details || {};
-    const done = await markPaid(id, { email: d.email || null, name: d.name || null, phone: d.phone || null, paymentIntent: s.payment_intent || null, ticketCode: ticketCode(id) });
+    const done = await markPaid(id, { email: d.email || null, name: d.name || null, phone: d.phone || null, paymentIntent: s.payment_intent || null });
     if (!done) {
       // Hold lapsed and the places were sold to someone else meanwhile.
       if (s.payment_intent) await refund(s.payment_intent, id);
       await setStatus(id, "refunded", ["held", "expired", "cancelled"]);
       return res.status(200).json({ ok: true, refunded: true });
     }
-    if (await sendTicket(done, origin(req)).catch((e) => { console.error("Ticket email failed:", e && e.message); return false; })) await markEmailed(id);
+    const tickets = await addTickets(done, makeTickets(done.items), newTicketId, ticketCode); // one per person
+    if (await sendTicket(done, tickets, origin(req)).catch((e) => { console.error("Ticket email failed:", e && e.message); return false; })) await markEmailed(id);
     return res.status(200).json({ ok: true, paid: true });
   } catch (e) {
     console.error("Webhook failed:", e && e.message);
