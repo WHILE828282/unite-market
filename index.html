@@ -139,7 +139,7 @@
     </div>
   </footer>
 
-  <!-- Checkout sheet (like the Unite checkout): order summary, confirmation, then the Blend widget -->
+  <!-- Checkout sheet (like the Unite checkout): order summary and confirmation, then Stripe Checkout -->
   <div id="sheet" class="fixed inset-0 z-50 hidden items-end justify-center bg-black/60 backdrop-blur-sm sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
     <div class="u-rise flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white dark:bg-[#1c1c1e] sm:rounded-3xl">
       <div class="flex items-center justify-between border-b border-slate-200/70 px-5 py-4 dark:border-white/[0.07]">
@@ -156,13 +156,11 @@
           <span>I confirm I am 21 or older and agree to the <a href="/terms" target="_blank" class="font-medium text-crimson-700 underline underline-offset-2 dark:text-crimson-200">Terms</a> and <a href="/refunds" target="_blank" class="font-medium text-crimson-700 underline underline-offset-2 dark:text-crimson-200">Refund Policy</a>.</span>
         </label>
 
-        <div id="blend-checkout" data-blend-src="" class="relative mt-4 hidden min-h-[460px] overflow-hidden rounded-2xl ring-1 ring-slate-200/80 dark:ring-white/10"></div>
-
         <button type="button" id="pay" disabled class="u-btn mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 py-3.5 text-base font-semibold text-white disabled:opacity-40 dark:bg-white dark:text-black">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          <span>Continue to payment</span>
+          <span id="pay-label">Continue to payment</span>
         </button>
-        <p id="pay-note" class="mt-3 hidden text-center text-sm text-slate-500 dark:text-slate-400">Ticket sales open soon.</p>
+        <p id="pay-note" class="mt-3 text-center text-sm text-slate-500 dark:text-slate-400">Your tickets are held for 15 minutes while you pay.</p>
         <p class="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
           <svg class="h-3.5 w-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
           Secure payment by Stripe
@@ -184,100 +182,121 @@
       }
       startsIn(); setInterval(startsIn, 30000);
 
-      // Ticket types. Prices are for display; Blend charges the real price, so keep these the same as in Blend.
-      // soldOut: true greys a ticket type out (e.g. when Early Bird is gone).
-      var GROUPS = [
-        { name: "Early Bird", note: "First 100 tickets only", badge: "Limited", soldOut: false, items: [["early-male", "Male", 80], ["early-female", "Female", 40]] },
-        { name: "General Admission", note: "Standard entry", items: [["ga-male", "Male", 100], ["ga-female", "Female", 50]] },
-        { name: "Group of 4", note: "Entry for 4 people, any mix", badge: "Best value", items: [["group-4", "4 people", 300]] },
-        { name: "VIP", note: "VIP area and fast-track entry", items: [["vip-male", "Male", 200], ["vip-female", "Female", 150]] },
-      ];
-      var TIERS = {}, cart = {}, MAX = 10;
-      GROUPS.forEach(function (g) { g.items.forEach(function (it) { TIERS[it[0]] = { group: g, name: it[1], price: it[2] }; cart[it[0]] = 0; }); });
+      // Tickets come from the server (/api/stock): prices, and how many of each are still left.
+      var GROUPS = [], TIERS = {}, cart = {}, MAX = 10, live = false;
+      var list = document.getElementById("tier-list");
       var sum = function (f) { return Object.keys(cart).reduce(function (n, k) { return n + f(k); }, 0); };
       var count = function () { return sum(function (k) { return cart[k]; }); };
       var total = function () { return sum(function (k) { return cart[k] * TIERS[k].price; }); };
-
+      var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
       var stepCls = "u-btn flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-lg font-semibold text-slate-700 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200";
-      document.getElementById("tier-list").innerHTML = GROUPS.map(function (g) {
-        return '<div class="mt-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200/60 dark:bg-[#121214] dark:ring-white/[0.06]' + (g.soldOut ? " opacity-50" : "") + '">' +
-          '<div class="flex items-center gap-2"><p class="font-bold">' + g.name + "</p>" +
-          (g.soldOut ? '<span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-500 dark:bg-[#2c2c2e] dark:text-slate-400">Sold out</span>'
-            : g.badge ? '<span class="rounded-full bg-crimson-50 px-2 py-0.5 text-[11px] font-semibold text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200">' + g.badge + "</span>" : "") +
-          '</div><p class="text-xs text-slate-500 dark:text-slate-400">' + g.note + "</p>" +
-          g.items.map(function (it) {
-            return '<div class="mt-2 flex items-center justify-between gap-3" data-tier="' + it[0] + '">' +
-              '<p class="text-sm"><span class="font-medium">' + it[1] + '</span><span class="block font-bold tabular-nums">' + it[2] + " AED</span></p>" +
-              '<div class="flex items-center gap-1">' +
-              '<button type="button" data-step="-1" aria-label="Fewer ' + g.name + " " + it[1] + ' tickets" class="' + stepCls + '">−</button>' +
-              '<span data-qty class="w-7 text-center font-semibold tabular-nums" aria-live="polite">0</span>' +
-              '<button type="button" data-step="1" aria-label="More ' + g.name + " " + it[1] + ' tickets" class="' + stepCls + '">+</button>' +
-              "</div></div>";
-          }).join("") + "</div>";
-      }).join("");
+      var chip = function (cls, t) { return '<span class="rounded-full px-2 py-0.5 text-[11px] font-semibold ' + cls + '">' + t + "</span>"; };
+      var GREY = "bg-slate-100 text-slate-500 dark:bg-[#2c2c2e] dark:text-slate-400", RED = "bg-crimson-50 text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200";
 
-      function render() {
-        document.querySelectorAll("[data-tier]").forEach(function (row) {
+      function build() {
+        list.innerHTML = GROUPS.map(function (g) {
+          var left = g.types.reduce(function (n, t) { return n + t.left; }, 0), out = live && !left;
+          var badge = out ? chip(GREY, "Sold out") : g.badge ? chip(RED, esc(g.badge)) : "";
+          return '<div class="mt-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200/60 dark:bg-[#121214] dark:ring-white/[0.06]' + (out ? " opacity-50" : "") + '">' +
+            '<div class="flex items-center gap-2"><p class="font-bold">' + esc(g.name) + "</p>" + badge + "</div>" +
+            '<p class="text-xs text-slate-500 dark:text-slate-400">' + esc(g.note) + "</p>" +
+            g.types.map(function (t) {
+              return '<div class="mt-2 flex items-center justify-between gap-3" data-tier="' + esc(t.id) + '">' +
+                '<p class="text-sm"><span class="font-medium">' + esc(t.name) + '</span><span class="block font-bold tabular-nums">' + t.price + ' AED</span>' +
+                '<span data-left class="block text-xs font-medium text-crimson-700 dark:text-crimson-200"></span></p>' +
+                '<div class="flex items-center gap-1">' +
+                '<button type="button" data-step="-1" aria-label="Fewer ' + esc(g.name + " " + t.name) + ' tickets" class="' + stepCls + '">−</button>' +
+                '<span data-qty class="w-7 text-center font-semibold tabular-nums" aria-live="polite">0</span>' +
+                '<button type="button" data-step="1" aria-label="More ' + esc(g.name + " " + t.name) + ' tickets" class="' + stepCls + '">+</button>' +
+                "</div></div>";
+            }).join("") + "</div>";
+        }).join("") + (live ? "" : '<p class="mt-4 rounded-2xl bg-slate-50 p-4 text-center text-sm text-slate-500 dark:bg-[#121214] dark:text-slate-400">Ticket sales open soon.</p>');
+        list.querySelectorAll("[data-tier]").forEach(function (row) {
           var k = row.getAttribute("data-tier");
+          row.querySelectorAll("[data-step]").forEach(function (b) {
+            b.addEventListener("click", function () { cart[k] = Math.max(0, Math.min(TIERS[k].left, cart[k] + Number(b.getAttribute("data-step")))); render(); });
+          });
+        });
+        render();
+      }
+      function render() {
+        list.querySelectorAll("[data-tier]").forEach(function (row) {
+          var k = row.getAttribute("data-tier"), t = TIERS[k];
           row.querySelector("[data-qty]").textContent = cart[k];
           row.querySelector('[data-step="-1"]').disabled = cart[k] === 0;
-          row.querySelector('[data-step="1"]').disabled = count() >= MAX || !!TIERS[k].group.soldOut;
+          row.querySelector('[data-step="1"]').disabled = !live || count() >= MAX || cart[k] >= t.left;
+          row.querySelector("[data-left]").textContent = live && t.left > 0 && t.left <= 20 ? "Only " + t.left + " left" : "";
         });
         document.querySelectorAll("[data-total]").forEach(function (el) { el.textContent = total(); });
         document.querySelectorAll("[data-count]").forEach(function (el) { el.textContent = count() ? count() + (count() === 1 ? " ticket" : " tickets") : "No tickets"; });
         document.querySelectorAll("[data-checkout]:not([data-mobile])").forEach(function (b) { b.disabled = !count(); });
       }
-      document.querySelectorAll("[data-tier]").forEach(function (row) {
-        var k = row.getAttribute("data-tier");
-        row.querySelectorAll("[data-step]").forEach(function (b) {
-          b.addEventListener("click", function () { cart[k] = Math.max(0, Math.min(MAX, cart[k] + Number(b.getAttribute("data-step")))); render(); });
+      function loadStock() {
+        return fetch("/api/stock", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) {
+          if (!j || !j.groups) throw new Error("no stock");
+          live = !!j.live; MAX = j.maxPerOrder || MAX; GROUPS = j.groups;
+          GROUPS.forEach(function (g) { g.types.forEach(function (t) {
+            TIERS[t.id] = { group: g.name, name: t.name, price: t.price, left: t.left, single: g.types.length === 1 };
+            cart[t.id] = Math.min(cart[t.id] || 0, t.left); // someone else bought the last ones
+          }); });
+          build();
+        }).catch(function () {
+          if (!GROUPS.length) list.innerHTML = '<p class="mt-4 text-center text-sm text-slate-500 dark:text-slate-400">Tickets couldn\'t load. Refresh the page to try again.</p>';
         });
-      });
-
-      // Checkout sheet -> Blend widget.
-      // Paste the Blend checkout URL here (docs/CTO-GUIDE.md, section 2). Only https://*.blendapp.ai URLs are accepted.
-      // If Blend supports pre-selecting tickets through the URL, add the quantities in blendUrl().
-      var BLEND_URL = "";
-      var blendUrl = function () { return BLEND_URL || document.getElementById("blend-checkout").getAttribute("data-blend-src"); };
-      var safe = function (u) { try { var x = new URL(u); return x.protocol === "https:" && /(^|\.)blendapp\.ai$/.test(x.hostname); } catch (e) { return false; } };
-      var sheet = document.getElementById("sheet"), agree = document.getElementById("agree"), pay = document.getElementById("pay");
-
-      function row(dt, dd, strong) {
-        return '<div class="flex justify-between' + (strong ? " border-t border-slate-200/50 pt-2 font-semibold dark:border-white/[0.07]" : "") + '"><dt class="' + (strong ? "" : "text-slate-500 dark:text-slate-400") + '">' + dt + '</dt><dd class="tabular-nums">' + dd + "</dd></div>";
       }
+      loadStock(); setInterval(loadStock, 30000);
+      document.addEventListener("visibilitychange", function () { if (!document.hidden) loadStock(); });
+
+      // Came back from Stripe without paying: free the held places straight away.
+      var params = new URLSearchParams(location.search);
+      if (params.get("cancelled")) {
+        fetch("/api/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ a: "cancel", order: params.get("cancelled") }) })
+          .catch(function () {}).then(loadStock);
+        history.replaceState(null, "", location.pathname + location.hash);
+      }
+
+      // Checkout sheet -> hold for 15 minutes -> Stripe Checkout.
+      var sheet = document.getElementById("sheet"), agree = document.getElementById("agree"), pay = document.getElementById("pay");
+      var note = document.getElementById("pay-note"), payLabel = document.getElementById("pay-label");
+      var NOTE = note.textContent;
+      function row(dt, dd, strong) {
+        return '<div class="flex justify-between gap-3' + (strong ? " border-t border-slate-200/50 pt-2 font-semibold dark:border-white/[0.07]" : "") + '"><dt class="' + (strong ? "" : "text-slate-500 dark:text-slate-400") + '">' + dt + '</dt><dd class="shrink-0 tabular-nums">' + dd + "</dd></div>";
+      }
+      function setNote(t, bad) { note.textContent = t; note.classList.toggle("text-rose-600", !!bad); }
       function openSheet() {
         if (!count()) return document.getElementById("tickets").scrollIntoView({ behavior: "smooth" });
         var html = '<div class="mb-2 font-semibold">Project X · Sun 25 Oct, 8:00 PM</div>';
-        Object.keys(TIERS).forEach(function (k) { if (cart[k]) html += row(TIERS[k].group.name + (TIERS[k].group.items.length > 1 ? " · " + TIERS[k].name : "") + " × " + cart[k], (cart[k] * TIERS[k].price).toFixed(2) + " AED"); });
+        Object.keys(TIERS).forEach(function (k) { if (cart[k]) html += row(esc(TIERS[k].group + (TIERS[k].single ? "" : " · " + TIERS[k].name)) + " × " + cart[k], (cart[k] * TIERS[k].price).toFixed(2) + " AED"); });
         html += row("Total", total().toFixed(2) + " AED", true);
         document.getElementById("summary").innerHTML = html;
-        agree.checked = false; pay.disabled = true; pay.classList.remove("hidden");
-        document.getElementById("confirm-row").classList.remove("hidden");
-        document.getElementById("pay-note").classList.add("hidden");
-        var box = document.getElementById("blend-checkout"); box.replaceChildren(); box.classList.add("hidden");
+        agree.checked = false; pay.disabled = true; payLabel.textContent = "Continue to payment"; setNote(NOTE);
         sheet.classList.remove("hidden"); sheet.classList.add("flex");
         document.body.style.overflow = "hidden";
       }
       function closeSheet() { sheet.classList.add("hidden"); sheet.classList.remove("flex"); document.body.style.overflow = ""; }
       agree.addEventListener("change", function () { pay.disabled = !agree.checked; });
       pay.addEventListener("click", function () {
-        var src = blendUrl();
-        if (!src || !safe(src)) return document.getElementById("pay-note").classList.remove("hidden");
-        var box = document.getElementById("blend-checkout");
-        var f = document.createElement("iframe");
-        f.src = src;
-        f.title = "Project X tickets: secure checkout";
-        f.allow = "payment *";
-        f.referrerPolicy = "strict-origin-when-cross-origin";
-        f.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation");
-        f.className = "absolute inset-0 h-full w-full border-0 bg-white";
-        box.replaceChildren(f); box.classList.remove("hidden");
-        pay.classList.add("hidden"); document.getElementById("confirm-row").classList.add("hidden");
+        if (pay.disabled) return;
+        pay.disabled = true; payLabel.textContent = "Holding your tickets…";
+        var items = {};
+        Object.keys(cart).forEach(function (k) { if (cart[k]) items[k] = cart[k]; });
+        fetch("/api/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: items }) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.ok && j.url) { payLabel.textContent = "Opening payment…"; location.href = j.url; return; }
+            throw new Error((j && j.error) || "Something went wrong. Please try again.");
+          })
+          .catch(function (e) {
+            setNote(e.message || "Something went wrong. Please try again.", true);
+            payLabel.textContent = "Continue to payment"; pay.disabled = !agree.checked;
+            loadStock();
+          });
       });
       document.querySelectorAll("[data-checkout]").forEach(function (b) { b.addEventListener("click", openSheet); });
       sheet.addEventListener("click", function (e) { if (e.target === sheet || e.target.closest("[data-close]")) closeSheet(); });
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSheet(); });
-      render();
+      // Back button from Stripe can restore this page from cache: reset the button and refresh the stock.
+      window.addEventListener("pageshow", function (e) { if (e.persisted) { closeSheet(); loadStock(); } });
     })();
   </script>
 </body>

@@ -29,3 +29,5 @@ button, a, label, input { touch-action: manipulation; }
 .dark .legal h2, .dark .legal strong { color: #f5f5f7; }
 .dark .legal p, .dark .legal li { color: #a1a1aa; }
 .dark .legal a { color: #e9b6bc; }
+@keyframes uSpin { to { transform: rotate(360deg); } }
+.u-spin { animation: uSpin .8s linear infinite; }
