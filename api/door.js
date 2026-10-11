@@ -12,6 +12,7 @@ export default async function handler(req, res) {
   if (!methodOk(req, res, ["GET", "POST"])) return;
   res.setHeader("Cache-Control", "no-store");
   const b = req.method === "POST" ? body(req) : req.query || {};
+  if (!String(process.env.DOOR_KEY || "").trim()) return res.status(503).json({ ok: false, error: "DOOR_KEY isn't set for this deployment. Add it in Vercel (Production) and redeploy." });
   if (!keyOk(b.key)) return res.status(403).json({ ok: false, error: "Wrong door key." });
   if (!dbConfigured()) return res.status(503).json({ ok: false, error: "The database isn't connected." });
   await ensureSchema();
