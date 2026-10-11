@@ -58,12 +58,12 @@ Same host as uniteuow.com.
 
 The landing page already has the ticket picker, the checkout sheet and the loader (`index.html`, `#blend-checkout` in the sheet and the `<script>` at the end).
 
-1. In the Blend dashboard, create the event "Project X" with two ticket types: **Gents 100 AED** and **Ladies 50 AED**, capacity 500 in total. Copy the event's **embed / checkout URL**.
+1. In the Blend dashboard, create the event "Project X" with the same ticket types and prices as the site (`GROUPS` in `index.html`): **Early Bird** Gents 80 / Ladies 40 (first 100), **Regular** 100 / 50, **Group of 4** 340 / 170, **VIP** 200 / 150 AED. When Early Bird sells out, set `soldOut: true` on it in `GROUPS`. Copy the event's **embed / checkout URL**.
 2. In `index.html`, paste it into:
    ```js
    var BLEND_URL = "https://…blendapp.ai/…";
    ```
-   The page's ticket picker shows the order summary; the buyer confirms the tickets inside the Blend widget. If Blend can pre-select ticket types and quantities through URL parameters, add them in `blendUrl()` (the `cart` object holds `gents` and `ladies`).
+   The page's ticket picker shows the order summary; the buyer confirms the tickets inside the Blend widget. If Blend can pre-select ticket types and quantities through URL parameters, add them in `blendUrl()` (the `cart` object holds the quantity of each ticket type, e.g. `early-gents`).
 3. What the loader already does:
    - It only accepts `https://` URLs on `blendapp.ai` or its subdomains. Anything else is ignored.
    - It loads the iframe only after the buyer has picked tickets and ticked "I confirm I am 21 or older and agree to the Terms and Refund Policy".
