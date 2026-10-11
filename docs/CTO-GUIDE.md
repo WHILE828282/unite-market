@@ -56,20 +56,20 @@ Same host as uniteuow.com.
 
 ## 2. Embedding the Blend checkout safely
 
-The landing page already has the slot and the loader (`index.html`, `#blend-checkout` and the second `<script>` block).
+The landing page already has the ticket picker, the checkout sheet and the loader (`index.html`, `#blend-checkout` in the sheet and the `<script>` at the end).
 
-1. In the Blend dashboard, create the event "Project X" with two ticket types: **Gents 100 AED** and **Ladies 50 AED**, capacity 500 in total. Copy the **embed / checkout URL** for each ticket type (or one URL for the event).
-2. In `index.html`, paste them into:
+1. In the Blend dashboard, create the event "Project X" with two ticket types: **Gents 100 AED** and **Ladies 50 AED**, capacity 500 in total. Copy the event's **embed / checkout URL**.
+2. In `index.html`, paste it into:
    ```js
-   var BLEND = { gents: "https://…blendapp.ai/…", ladies: "https://…blendapp.ai/…" };
+   var BLEND_URL = "https://…blendapp.ai/…";
    ```
-   For a single event URL, set `data-blend-src="https://…"` on `#blend-checkout` instead and leave `BLEND` empty.
+   The page's ticket picker shows the order summary; the buyer confirms the tickets inside the Blend widget. If Blend can pre-select ticket types and quantities through URL parameters, add them in `blendUrl()` (the `cart` object holds `gents` and `ladies`).
 3. What the loader already does:
    - It only accepts `https://` URLs on `blendapp.ai` or its subdomains. Anything else is ignored.
-   - It loads the iframe only after the buyer has picked a ticket and ticked the 21+ / Terms box.
+   - It loads the iframe only after the buyer has picked tickets and ticked "I confirm I am 21 or older and agree to the Terms and Refund Policy".
    - The iframe gets `allow="payment *"` (Apple Pay / Google Pay inside the frame), a `sandbox` with only what a checkout needs, and `referrerpolicy="strict-origin-when-cross-origin"`.
 4. **Match the CSP to Blend's real domains.** `vercel.json` sends a Content-Security-Policy that allows frames, scripts and requests from `*.blendapp.ai` and Stripe only. Open Blend's embed code. If the widget is served from another domain (a CDN, `checkout.<something>`, a white-label subdomain like `tickets.unite.market`), add it to `frame-src`, and to `script-src`/`connect-src` if it uses a script. Otherwise the browser blocks it silently; check DevTools → Console for "Refused to frame".
-5. **If Blend gives a `<script>` snippet instead of a URL:** paste the snippet inside `<div id="blend-checkout">` in place of the placeholder, add its script domain to `script-src`, and remove the second `<script>` block's iframe code. Never paste a snippet that loads from a domain you don't recognise.
+5. **If Blend gives a `<script>` snippet instead of a URL:** load the snippet into `<div id="blend-checkout">` from the Continue to payment handler instead of the iframe, and add its script domain to `script-src`. Never paste a snippet that loads from a domain you don't recognise.
 6. **Apple Pay:** Apple Pay inside an iframe only works if Blend/Stripe has verified the domain. Ask Blend to register `unite.market` for Apple Pay. With Stripe, that means hosting `/.well-known/apple-developer-merchantid-domain-association`; if Blend gives you that file, put it in this repo at that exact path.
 7. **Test before the drop:** run one real 1 AED (or test-mode) purchase in Safari on an iPhone and in Chrome on Android, check the ticket email arrives, then refund it.
 8. **Production note:** the Tailwind Play CDN is fine for a launch page but adds ~100 KB of JS and a flash of unstyled content on slow phones. After launch, swap it for a compiled stylesheet (`npx tailwindcss -o styles.css --minify`) and remove `cdn.tailwindcss.com` from the CSP.
