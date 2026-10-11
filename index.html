@@ -1,221 +1,254 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Project X · Interuniversity Student Rave · Unite Market</title>
+  <title>Project X · Unite Market</title>
   <meta name="description" content="Project X: the interuniversity student rave. 25 October 2026, 17:00–23:00, JVC, Dubai. 21+ with original ID. Tickets on unite.market." />
   <meta property="og:title" content="Project X · Interuniversity Student Rave" />
   <meta property="og:description" content="25 Oct 2026 · 17:00–23:00 · Secret mansion, JVC, Dubai · 21+ · BYOB" />
   <meta property="og:url" content="https://unite.market" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#05010d" />
+  <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site.css" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { display: ["Orbitron", "sans-serif"], sans: ["Inter", "system-ui", "sans-serif"] },
-          colors: { ink: "#05010d", neon: { pink: "#ff2bd6", cyan: "#00f0ff", lime: "#b6ff00", violet: "#8b5cf6" } },
-        },
-      },
-    };
-  </script>
-  <style>
-    body { background: #05010d; }
-    .grid-bg { background-image: linear-gradient(rgba(0, 240, 255, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 43, 214, .07) 1px, transparent 1px); background-size: 44px 44px; }
-    .glow-pink { text-shadow: 0 0 8px #ff2bd6, 0 0 28px rgba(255, 43, 214, .6); }
-    .glow-cyan { text-shadow: 0 0 8px #00f0ff, 0 0 28px rgba(0, 240, 255, .55); }
-    .box-pink { box-shadow: 0 0 0 1px rgba(255, 43, 214, .6), 0 0 30px -6px rgba(255, 43, 214, .7); }
-    .box-cyan { box-shadow: 0 0 0 1px rgba(0, 240, 255, .6), 0 0 30px -6px rgba(0, 240, 255, .7); }
-    .glitch { position: relative; }
-    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; }
-    .glitch::before { color: #00f0ff; transform: translate(2px, 0); clip-path: inset(0 0 55% 0); animation: gl1 3s infinite steps(1); opacity: .8; }
-    .glitch::after { color: #ff2bd6; transform: translate(-2px, 0); clip-path: inset(55% 0 0 0); animation: gl2 2.4s infinite steps(1); opacity: .8; }
-    @keyframes gl1 { 0%, 92% { transform: translate(2px, 0); } 94% { transform: translate(-4px, -1px); } 97% { transform: translate(5px, 1px); } }
-    @keyframes gl2 { 0%, 90% { transform: translate(-2px, 0); } 93% { transform: translate(4px, 1px); } 96% { transform: translate(-5px, -1px); } }
-    .scan::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .03) 0 1px, transparent 1px 3px); }
-    @media (prefers-reduced-motion: reduce) { .glitch::before, .glitch::after { animation: none; } }
-  </style>
+  <script src="/theme.js"></script>
 </head>
-<body class="min-h-screen overflow-x-hidden font-sans text-white antialiased">
+<body class="min-h-screen bg-[#f2f2f7] text-slate-900 dark:bg-black dark:text-[#f5f5f7]">
 
-  <!-- Top bar -->
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-      <a href="/" class="font-display text-lg font-extrabold tracking-widest">UNITE<span class="text-neon-pink">.</span>MARKET</a>
-      <nav class="flex items-center gap-4 text-sm">
-        <a href="#details" class="hidden text-white/70 hover:text-white sm:inline">Details</a>
-        <a href="#tickets" class="hidden text-white/70 hover:text-white sm:inline">Tickets</a>
-        <a href="#rules" class="hidden text-white/70 hover:text-white sm:inline">Entry rules</a>
-        <a href="#tickets" class="rounded-full bg-neon-pink px-4 py-2 font-semibold text-ink hover:bg-white">Get tickets</a>
-      </nav>
+  <!-- Header: same as uniteuow.com (icon + wordmark, theme toggle) -->
+  <header class="u-header u-safe-top sticky top-0 z-30 border-b border-[rgba(110,90,70,0.14)] dark:border-white/10">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <a href="/" aria-label="Unite Market home" class="flex items-center gap-2.5 rounded-lg">
+        <img src="/icons/unite-icon-small.svg" alt="" width="36" height="36" class="h-10 w-10 shrink-0 rounded-[22%] ring-1 ring-white/15" />
+        <span class="text-xl font-extrabold tracking-tight text-[#0f172a] dark:text-white">unite</span>
+        <span class="border-l border-slate-200 pl-2.5 text-xs font-medium text-slate-500 dark:border-white/15 dark:text-slate-400">market</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <button type="button" data-theme-toggle role="switch" aria-label="Dark mode" title="Switch theme"
+          class="u-toggle u-btn relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-sm ring-1 ring-slate-200 hover:text-slate-900 dark:bg-white/[0.08] dark:text-slate-200 dark:shadow-none dark:ring-white/[0.12] dark:hover:text-white">
+          <span class="u-moon absolute inset-0 flex items-center justify-center">
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </span>
+          <span class="u-sun absolute inset-0 flex items-center justify-center">
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </span>
+        </button>
+        <a href="#tickets" class="u-btn inline-flex h-10 items-center rounded-full bg-crimson-700 px-4 text-sm font-semibold text-white hover:bg-crimson-600">Tickets</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- Hero + countdown -->
-    <section class="scan relative overflow-hidden">
-      <div class="grid-bg absolute inset-0"></div>
-      <div class="absolute -left-32 top-10 h-80 w-80 rounded-full bg-neon-pink/30 blur-3xl"></div>
-      <div class="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-neon-cyan/25 blur-3xl"></div>
-      <div class="relative mx-auto max-w-6xl px-4 pb-20 pt-16 text-center sm:pt-24">
-        <p class="inline-flex items-center gap-2 rounded-full border border-neon-cyan/40 px-3 py-1 text-xs font-semibold uppercase tracking-[.25em] text-neon-cyan">
-          <span class="h-2 w-2 animate-pulse rounded-full bg-neon-lime"></span> Interuniversity student rave
-        </p>
-        <h1 class="glitch glow-pink mt-6 font-display text-6xl font-black tracking-tight sm:text-8xl" data-text="PROJECT X">PROJECT X</h1>
-        <p class="mx-auto mt-5 max-w-xl text-base text-white/75 sm:text-lg">
-          AUD · Middlesex · Heriot-Watt · UOWD and more. One night, one secret mansion, 500 students.
-        </p>
-        <p class="mt-3 font-display text-sm tracking-[.3em] text-neon-cyan glow-cyan">25.10.2026 · 17:00 – 23:00 · JVC, DUBAI</p>
+    <!-- Hero: always dark, photo collage + crimson glow, like the uniteuow.com home hero -->
+    <section class="relative isolate overflow-hidden rounded-b-[28px] bg-[#0b0b0e] text-white shadow-[0_20px_40px_-24px_rgba(0,0,0,.6)] sm:rounded-b-[44px]">
+      <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div id="collage" class="absolute -inset-x-24 -top-16 grid -rotate-6 grid-cols-4 gap-3 opacity-80 sm:-inset-x-10 sm:grid-cols-6"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0b0b0e]/30 via-[#0b0b0e]/70 to-[#0b0b0e]"></div>
+        <div class="u-hero-glow absolute -right-24 -top-24 h-80 w-80 rounded-full"></div>
+        <div class="u-hero-glow absolute -bottom-32 -left-24 h-72 w-72 rounded-full opacity-60"></div>
+      </div>
 
-        <div id="countdown" class="mx-auto mt-10 grid max-w-xl grid-cols-4 gap-2 sm:gap-4" aria-live="polite">
-          <div class="box-pink rounded-2xl bg-white/5 py-4"><p data-cd="d" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Days</p></div>
-          <div class="box-pink rounded-2xl bg-white/5 py-4"><p data-cd="h" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Hours</p></div>
-          <div class="box-cyan rounded-2xl bg-white/5 py-4"><p data-cd="m" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Min</p></div>
-          <div class="box-cyan rounded-2xl bg-white/5 py-4"><p data-cd="s" class="font-display text-3xl font-extrabold tabular-nums sm:text-5xl">--</p><p class="mt-1 text-[10px] uppercase tracking-widest text-white/60 sm:text-xs">Sec</p></div>
+      <div class="u-rise relative mx-auto max-w-5xl px-4 pb-10 pt-10 sm:pb-14 sm:pt-16">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-crimson-200 ring-1 ring-inset ring-white/15">
+          <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-crimson-400"></span> Interuniversity student rave
+        </span>
+        <h1 class="mt-4 max-w-2xl text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-7xl">Project <span class="text-crimson-200">X</span></h1>
+        <p class="mt-4 max-w-md text-base text-slate-300 sm:text-lg">AUD, Middlesex, Heriot-Watt, UOWD and more. One night, one secret mansion, 500 students.</p>
+        <p class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-400">
+          <span>Sunday, 25 October · 17:00 – 23:00</span>
+          <span class="flex items-center gap-1.5">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Secret mansion, JVC, Dubai
+          </span>
+        </p>
+
+        <!-- Countdown to 25 Oct 2026, 17:00 GST -->
+        <div id="countdown" class="mt-6 grid max-w-md grid-cols-4 gap-2.5" aria-label="Time until doors open">
+          <div class="rounded-2xl bg-white/[0.07] p-3 text-center ring-1 ring-inset ring-white/10 backdrop-blur-md"><p data-cd="d" class="text-2xl font-bold tabular-nums sm:text-3xl">--</p><p class="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-crimson-200">Days</p></div>
+          <div class="rounded-2xl bg-white/[0.07] p-3 text-center ring-1 ring-inset ring-white/10 backdrop-blur-md"><p data-cd="h" class="text-2xl font-bold tabular-nums sm:text-3xl">--</p><p class="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-crimson-200">Hours</p></div>
+          <div class="rounded-2xl bg-white/[0.07] p-3 text-center ring-1 ring-inset ring-white/10 backdrop-blur-md"><p data-cd="m" class="text-2xl font-bold tabular-nums sm:text-3xl">--</p><p class="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-crimson-200">Min</p></div>
+          <div class="rounded-2xl bg-white/[0.07] p-3 text-center ring-1 ring-inset ring-white/10 backdrop-blur-md"><p data-cd="s" class="text-2xl font-bold tabular-nums sm:text-3xl">--</p><p class="mt-0.5 text-[11px] font-semibold uppercase tracking-wider text-crimson-200">Sec</p></div>
         </div>
 
-        <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#tickets" class="w-full rounded-xl bg-neon-pink px-8 py-4 font-display text-sm font-extrabold tracking-widest text-ink hover:bg-white sm:w-auto">BUY TICKETS</a>
-          <a href="#rules" class="w-full rounded-xl border border-white/20 px-8 py-4 text-sm font-semibold text-white/80 hover:border-white hover:text-white sm:w-auto">21+ · Original ID · BYOB</a>
+        <div class="mt-6 flex flex-wrap gap-2.5">
+          <a href="#tickets" class="u-btn rounded-xl bg-crimson-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-crimson-900/40 hover:bg-crimson-500">Get tickets →</a>
+          <a href="#rules" class="u-btn rounded-xl bg-white/10 px-5 py-3 text-sm font-semibold text-white ring-1 ring-inset ring-white/20 backdrop-blur-sm hover:bg-white/15">21+ · Original ID · BYOB</a>
         </div>
       </div>
     </section>
 
-    <!-- Event details -->
-    <section id="details" class="mx-auto max-w-6xl px-4 py-16">
-      <h2 class="font-display text-2xl font-extrabold tracking-widest sm:text-3xl">THE <span class="text-neon-cyan">DETAILS</span></h2>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
-          <p class="text-xs uppercase tracking-widest text-neon-pink">Date</p>
-          <p class="mt-2 text-xl font-bold">Sunday, 25 October 2026</p>
-        </div>
-        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
-          <p class="text-xs uppercase tracking-widest text-neon-pink">Time</p>
-          <p class="mt-2 text-xl font-bold">17:00 – 23:00</p>
-          <p class="mt-1 text-sm text-white/60">Last entry 21:00 · Gulf Standard Time</p>
-        </div>
-        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
-          <p class="text-xs uppercase tracking-widest text-neon-pink">Location</p>
-          <p class="mt-2 text-xl font-bold">Secret Mansion, JVC</p>
-          <p class="mt-1 text-sm text-white/60">Exact pin sent to ticket holders by email 24 h before</p>
-        </div>
-        <div class="rounded-2xl border border-white/10 bg-white/[.03] p-5">
-          <p class="text-xs uppercase tracking-widest text-neon-pink">Capacity</p>
-          <p class="mt-2 text-xl font-bold">500 guests</p>
-          <p class="mt-1 text-sm text-white/60">Hard cap · no tickets at the door</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="tickets" class="relative">
-      <div class="grid-bg absolute inset-0 opacity-50"></div>
-      <div class="relative mx-auto max-w-6xl px-4 py-16">
-        <h2 class="font-display text-2xl font-extrabold tracking-widest sm:text-3xl">GET <span class="text-neon-pink">TICKETS</span></h2>
-        <p class="mt-2 text-white/60">One ticket, one person. Prices in UAE dirhams (AED). Apple Pay, Google Pay and cards accepted.</p>
-
-        <div class="mt-8 grid gap-6 md:grid-cols-2">
-          <article class="box-cyan flex flex-col rounded-3xl bg-ink/90 p-6">
-            <div class="flex items-start justify-between">
-              <div>
-                <h3 class="font-display text-xl font-extrabold tracking-widest text-neon-cyan">GENTS</h3>
-                <p class="mt-1 text-sm text-white/60">General admission · 21+</p>
-              </div>
-              <span class="rounded-full border border-neon-cyan/50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-neon-cyan">Limited</span>
-            </div>
-            <p class="mt-6 font-display text-5xl font-black">100 <span class="text-lg font-semibold text-white/60">AED</span></p>
-            <ul class="mt-6 space-y-2 text-sm text-white/80">
-              <li>▸ Entry 17:00 – 21:00, party till 23:00</li>
-              <li>▸ Digital QR ticket by email</li>
-              <li>▸ BYOB: bring your own drinks (21+ only)</li>
-            </ul>
-            <button type="button" data-tier="gents" class="tier-btn mt-8 rounded-xl bg-neon-cyan py-3.5 font-display text-sm font-extrabold tracking-widest text-ink hover:bg-white">SELECT GENTS</button>
-          </article>
-
-          <article class="box-pink flex flex-col rounded-3xl bg-ink/90 p-6">
-            <div class="flex items-start justify-between">
-              <div>
-                <h3 class="font-display text-xl font-extrabold tracking-widest text-neon-pink">LADIES</h3>
-                <p class="mt-1 text-sm text-white/60">General admission · 21+</p>
-              </div>
-              <span class="rounded-full border border-neon-pink/50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-neon-pink">Limited</span>
-            </div>
-            <p class="mt-6 font-display text-5xl font-black">50 <span class="text-lg font-semibold text-white/60">AED</span></p>
-            <ul class="mt-6 space-y-2 text-sm text-white/80">
-              <li>▸ Entry 17:00 – 21:00, party till 23:00</li>
-              <li>▸ Digital QR ticket by email</li>
-              <li>▸ BYOB: bring your own drinks (21+ only)</li>
-            </ul>
-            <button type="button" data-tier="ladies" class="tier-btn mt-8 rounded-xl bg-neon-pink py-3.5 font-display text-sm font-extrabold tracking-widest text-ink hover:bg-white">SELECT LADIES</button>
-          </article>
-        </div>
-
-        <p class="mt-6 text-sm text-white/60">UOWD student? Sign in on <a href="https://www.uniteuow.com" class="text-neon-cyan underline underline-offset-4">uniteuow.com</a> with your @uowdubai.ac.ae email for 50% off.</p>
-
-        <!-- Checkout: Blend white-label widget. See docs/CTO-GUIDE.md, section 2. -->
-        <div id="checkout" class="mt-10 scroll-mt-24">
-          <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-white/50">Secure checkout · <span id="tier-label">choose a ticket above</span></p>
-          <div id="blend-checkout"
-               data-blend-src=""
-               class="relative flex min-h-[520px] items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-neon-violet/60 bg-white/[.02]">
-            <div id="blend-placeholder" class="px-6 text-center">
-              <p class="font-display text-lg font-extrabold tracking-widest text-neon-violet">BLEND CHECKOUT</p>
-              <p class="mx-auto mt-2 max-w-sm text-sm text-white/60">The ticket checkout loads here. Payments are processed securely by Stripe through Blend; card details never touch unite.market.</p>
-            </div>
+    <div class="mx-auto max-w-5xl px-4">
+      <!-- Details -->
+      <section id="details" class="scroll-mt-20 pt-10">
+        <h2 class="text-2xl font-bold tracking-tight">Details</h2>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-crimson-700 dark:text-crimson-300">Date</p>
+            <p class="mt-1 font-semibold">Sunday, 25 October 2026</p>
           </div>
-          <label class="mt-4 flex items-start gap-3 text-sm text-white/70">
-            <input id="agree" type="checkbox" class="mt-0.5 h-4 w-4 shrink-0 accent-pink-500" />
-            <span>I am 21 or older, I will bring my original physical ID, and I agree to the <a href="/terms" class="text-neon-cyan underline underline-offset-4">Terms &amp; Conditions</a> and the <a href="/refunds" class="text-neon-cyan underline underline-offset-4">Refund &amp; Cancellation Policy</a>.</span>
-          </label>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-crimson-700 dark:text-crimson-300">Time</p>
+            <p class="mt-1 font-semibold">17:00 – 23:00</p>
+            <p class="mt-0.5 text-sm text-slate-500 dark:text-slate-400">Last entry 21:00</p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-crimson-700 dark:text-crimson-300">Location</p>
+            <p class="mt-1 font-semibold">Secret mansion, JVC</p>
+            <p class="mt-0.5 text-sm text-slate-500 dark:text-slate-400">Exact pin emailed to ticket holders 24 h before</p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-crimson-700 dark:text-crimson-300">Capacity</p>
+            <p class="mt-1 font-semibold">500 guests</p>
+            <p class="mt-0.5 text-sm text-slate-500 dark:text-slate-400">No tickets at the door</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Entry rules -->
-    <section id="rules" class="mx-auto max-w-6xl px-4 py-16">
-      <h2 class="font-display text-2xl font-extrabold tracking-widest sm:text-3xl">ENTRY <span class="text-neon-lime">RULES</span></h2>
-      <div class="mt-8 grid gap-4 md:grid-cols-3">
-        <div class="rounded-2xl border border-neon-lime/30 bg-white/[.03] p-5">
-          <p class="font-display text-3xl font-black text-neon-lime">21+</p>
-          <p class="mt-2 text-sm text-white/75">Strictly 21 and over. Bring your <b>original</b> Emirates ID, passport or UAE driving licence. Photos, copies and digital IDs are refused.</p>
+      <!-- Tickets -->
+      <section id="tickets" class="scroll-mt-20 pt-10">
+        <h2 class="text-2xl font-bold tracking-tight">Tickets</h2>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">One ticket, one person. Prices in AED. Apple Pay, Google Pay and cards.</p>
+
+        <div class="mt-4 grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Ticket type">
+          <button type="button" role="radio" aria-checked="false" data-tier="gents"
+            class="tier u-card group rounded-3xl bg-white p-5 text-left shadow-sm ring-1 ring-slate-200/80 aria-checked:ring-2 aria-checked:ring-crimson-600 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10 dark:aria-checked:ring-crimson-400">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-lg font-bold">Gents</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">General admission · 21+</p>
+              </div>
+              <span class="whitespace-nowrap rounded-full bg-slate-900 px-3 py-1 text-sm font-bold text-white dark:bg-white dark:text-black">100 AED</span>
+            </div>
+            <ul class="mt-4 space-y-1.5 text-sm text-slate-600 dark:text-slate-300">
+              <li>· Entry 17:00 – 21:00, party till 23:00</li>
+              <li>· QR ticket by email</li>
+              <li>· BYOB, 21+ only</li>
+            </ul>
+            <span class="mt-5 flex w-full items-center justify-center rounded-xl bg-slate-100 py-3 text-sm font-semibold text-slate-700 group-aria-checked:bg-crimson-700 group-aria-checked:text-white dark:bg-[#2c2c2e] dark:text-slate-200">Select</span>
+          </button>
+
+          <button type="button" role="radio" aria-checked="false" data-tier="ladies"
+            class="tier u-card group rounded-3xl bg-white p-5 text-left shadow-sm ring-1 ring-slate-200/80 aria-checked:ring-2 aria-checked:ring-crimson-600 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10 dark:aria-checked:ring-crimson-400">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-lg font-bold">Ladies</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">General admission · 21+</p>
+              </div>
+              <span class="whitespace-nowrap rounded-full bg-slate-900 px-3 py-1 text-sm font-bold text-white dark:bg-white dark:text-black">50 AED</span>
+            </div>
+            <ul class="mt-4 space-y-1.5 text-sm text-slate-600 dark:text-slate-300">
+              <li>· Entry 17:00 – 21:00, party till 23:00</li>
+              <li>· QR ticket by email</li>
+              <li>· BYOB, 21+ only</li>
+            </ul>
+            <span class="mt-5 flex w-full items-center justify-center rounded-xl bg-slate-100 py-3 text-sm font-semibold text-slate-700 group-aria-checked:bg-crimson-700 group-aria-checked:text-white dark:bg-[#2c2c2e] dark:text-slate-200">Select</span>
+          </button>
         </div>
-        <div class="rounded-2xl border border-neon-lime/30 bg-white/[.03] p-5">
-          <p class="font-display text-3xl font-black text-neon-lime">BYOB</p>
-          <p class="mt-2 text-sm text-white/75">No drinks are sold. Guests 21+ may bring sealed drinks for personal use only. No glass on the pool deck. Bags are checked at the door.</p>
+
+        <!-- UOWD discount: same featured-card look as uniteuow.com -->
+        <a href="https://www.uniteuow.com" class="u-card mt-3 flex items-center justify-between gap-4 rounded-3xl p-5 text-white shadow-xl ring-1 ring-white/10"
+          style="background: radial-gradient(120% 90% at 100% 0%, rgba(196,90,104,.55), transparent 55%), radial-gradient(90% 80% at 0% 100%, rgba(116,22,41,.6), transparent 60%), linear-gradient(160deg, #111827 0%, #0a0f1d 100%)">
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-[0.12em] text-crimson-200">UOWD students</p>
+            <p class="mt-1 font-semibold">50% off with your @uowdubai.ac.ae email</p>
+            <p class="mt-0.5 text-sm text-slate-300">Sign in on uniteuow.com to get the student price.</p>
+          </div>
+          <span class="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-bold text-slate-900">Open →</span>
+        </a>
+
+        <!-- Checkout: styled like the Unite checkout sheet. Blend widget loads into #blend-checkout (docs/CTO-GUIDE.md, section 2). -->
+        <div id="checkout" class="mt-6 scroll-mt-20 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+          <div class="px-5 pt-5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-baseline gap-2">
+                <span class="text-xl font-extrabold tracking-tight">Checkout</span>
+                <span class="text-xs font-medium text-slate-400">Secure</span>
+              </div>
+              <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-500 dark:bg-[#2c2c2e] dark:text-slate-400">
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Blend · Stripe
+              </span>
+            </div>
+
+            <dl class="mt-4 space-y-1.5 rounded-2xl border border-slate-200/50 bg-slate-50 p-4 text-sm dark:border-white/[0.07] dark:bg-[#121214]">
+              <div class="flex justify-between"><dt class="text-slate-500 dark:text-slate-400">Ticket</dt><dd id="sum-tier" class="text-slate-800 dark:text-slate-200">Choose above</dd></div>
+              <div class="flex justify-between"><dt class="text-slate-500 dark:text-slate-400">Event</dt><dd class="text-slate-800 dark:text-slate-200">Project X · 25 Oct</dd></div>
+              <div class="flex justify-between border-t border-slate-200/50 pt-2 font-semibold dark:border-white/[0.07]"><dt>Total</dt><dd id="sum-total" class="tabular-nums">–</dd></div>
+            </dl>
+
+            <label class="mt-4 flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+              <input id="agree" type="checkbox" class="mt-0.5 h-4 w-4 shrink-0 rounded accent-[#741629]" />
+              <span>I am 21 or older, I will bring my original physical ID, and I agree to the <a href="/terms" class="font-medium text-crimson-700 underline underline-offset-2 dark:text-crimson-200">Terms &amp; Conditions</a> and <a href="/refunds" class="font-medium text-crimson-700 underline underline-offset-2 dark:text-crimson-200">Refund Policy</a>.</span>
+            </label>
+          </div>
+
+          <div id="blend-checkout" data-blend-src=""
+            class="relative mx-5 mt-4 flex min-h-[420px] items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-[#121214]">
+            <p id="blend-note" class="max-w-xs px-6 text-center text-sm text-slate-500 dark:text-slate-400">Choose a ticket and tick the box above. The secure Blend checkout opens here; card details never touch unite.market.</p>
+          </div>
+
+          <p class="flex items-center justify-center gap-1.5 px-5 pb-5 pt-4 text-xs text-slate-500 dark:text-slate-400">
+            <svg class="h-3.5 w-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            Payments by Stripe · PCI DSS · 256-bit TLS
+          </p>
         </div>
-        <div class="rounded-2xl border border-neon-lime/30 bg-white/[.03] p-5">
-          <p class="font-display text-3xl font-black text-neon-lime">ZERO</p>
-          <p class="mt-2 text-sm text-white/75">Zero tolerance for drugs, weapons, harassment or fake ID. Breaking the rules means removal without refund; illegal acts are reported to Dubai Police.</p>
+      </section>
+
+      <!-- Entry rules -->
+      <section id="rules" class="scroll-mt-20 pb-12 pt-10">
+        <h2 class="text-2xl font-bold tracking-tight">Entry rules</h2>
+        <div class="mt-4 grid gap-3 md:grid-cols-3">
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <span class="inline-flex rounded-full bg-crimson-50 px-2.5 py-1 text-xs font-bold text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200">21+</span>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">Strictly 21 and over. Bring your <b class="text-slate-900 dark:text-white">original</b> Emirates ID, passport or UAE driving licence. Photos, copies and digital IDs are refused.</p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <span class="inline-flex rounded-full bg-crimson-50 px-2.5 py-1 text-xs font-bold text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200">BYOB</span>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">No drinks are sold. Guests 21+ may bring sealed drinks for personal use only. No glass on the pool deck. Bags are checked at the door.</p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+            <span class="inline-flex rounded-full bg-crimson-50 px-2.5 py-1 text-xs font-bold text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200">Zero tolerance</span>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">No drugs, weapons, harassment or fake ID. Breaking the rules means removal without refund; illegal acts are reported to Dubai Police.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
-  <footer class="border-t border-white/10 bg-black/40">
-    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-white/60 md:flex-row md:items-start md:justify-between">
+  <footer class="border-t border-slate-200/80 dark:border-white/10">
+    <div class="mx-auto flex max-w-5xl flex-col gap-5 px-4 py-8 text-sm text-slate-500 dark:text-slate-400 md:flex-row md:items-start md:justify-between">
       <div>
-        <p class="font-display font-extrabold tracking-widest text-white">UNITE<span class="text-neon-pink">.</span>MARKET</p>
+        <p class="flex items-center gap-2 font-extrabold tracking-tight text-slate-900 dark:text-white"><img src="/icons/unite-icon-small.svg" alt="" class="h-6 w-6 rounded-[22%]" /> unite market</p>
         <p class="mt-2">Operated by [LEGAL ENTITY NAME], [TRADE LICENCE NO.], Dubai, United Arab Emirates.</p>
-        <p class="mt-1">Support: <a href="mailto:support@unite.market" class="text-white/80 hover:text-white">support@unite.market</a> · [PHONE / WHATSAPP]</p>
+        <p class="mt-1">Support: <a href="mailto:support@unite.market" class="hover:text-slate-900 dark:hover:text-white">support@unite.market</a> · [PHONE / WHATSAPP]</p>
         <p class="mt-1">All prices in AED. © 2026 Unite.</p>
       </div>
       <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Legal">
-        <a href="/terms" class="hover:text-white">Terms &amp; Conditions</a>
-        <a href="/refunds" class="hover:text-white">Refund &amp; Cancellation</a>
-        <a href="/privacy" class="hover:text-white">Privacy Policy</a>
-        <a href="mailto:support@unite.market" class="hover:text-white">Contact</a>
+        <a href="/terms" class="hover:text-slate-900 dark:hover:text-white">Terms &amp; Conditions</a>
+        <a href="/refunds" class="hover:text-slate-900 dark:hover:text-white">Refund &amp; Cancellation</a>
+        <a href="/privacy" class="hover:text-slate-900 dark:hover:text-white">Privacy Policy</a>
+        <a href="mailto:support@unite.market" class="hover:text-slate-900 dark:hover:text-white">Contact</a>
       </nav>
     </div>
   </footer>
 
   <script>
+    // Hero collage (same photos as the uniteuow.com home hero).
+    (function () {
+      var box = document.getElementById("collage");
+      for (var i = 1; i <= 18; i++) {
+        var d = document.createElement("div");
+        d.className = "aspect-square overflow-hidden rounded-2xl bg-white/5" + (i % 2 ? "" : " translate-y-6");
+        var img = document.createElement("img");
+        img.src = "/collage/" + String(i).padStart(2, "0") + ".webp"; img.alt = ""; img.decoding = "async";
+        img.loading = i <= 8 ? "eager" : "lazy"; img.className = "h-full w-full object-cover";
+        d.appendChild(img); box.appendChild(d);
+      }
+    })();
+
     // Countdown to 25 Oct 2026, 17:00 Gulf Standard Time (UTC+4).
     (function () {
       var target = Date.parse("2026-10-25T17:00:00+04:00");
@@ -227,44 +260,50 @@
         el("h").textContent = pad(Math.floor(left / 36e5) % 24);
         el("m").textContent = pad(Math.floor(left / 6e4) % 60);
         el("s").textContent = pad(Math.floor(left / 1e3) % 60);
-        if (!left) { clearInterval(timer); document.getElementById("countdown").setAttribute("aria-label", "The event has started"); }
+        if (!left) clearInterval(timer);
       }
       var timer = setInterval(tick, 1000); tick();
     })();
 
-    // Ticket choice -> loads the Blend checkout for that tier once the buyer has ticked the 21+ / terms box.
-    // Paste the Blend checkout URLs here (see docs/CTO-GUIDE.md, section 2). Only https://*.blendapp.ai URLs are accepted.
+    // Ticket choice -> Blend checkout, once the buyer has ticked the 21+ / terms box.
+    // Paste the Blend checkout URLs here (docs/CTO-GUIDE.md, section 2). Only https://*.blendapp.ai URLs are accepted.
     (function () {
       var BLEND = { gents: "", ladies: "" };
-      var NAMES = { gents: "Gents · 100 AED", ladies: "Ladies · 50 AED" };
+      var TIERS = { gents: ["Gents × 1", "100.00 AED"], ladies: ["Ladies × 1", "50.00 AED"] };
       var tier = null;
       var box = document.getElementById("blend-checkout");
       var agree = document.getElementById("agree");
       var safe = function (u) { try { var x = new URL(u); return x.protocol === "https:" && /(^|\.)blendapp\.ai$/.test(x.hostname); } catch (e) { return false; } };
-
+      function note(t) {
+        var p = document.createElement("p");
+        p.className = "max-w-xs px-6 text-center text-sm text-slate-500 dark:text-slate-400";
+        p.textContent = t;
+        box.replaceChildren(p);
+      }
       function load() {
         if (!tier) return;
-        document.getElementById("tier-label").textContent = NAMES[tier];
+        document.getElementById("sum-tier").textContent = TIERS[tier][0];
+        document.getElementById("sum-total").textContent = TIERS[tier][1];
+        if (!agree.checked) return note("Tick the 21+ and terms box above to continue.");
         var src = BLEND[tier] || box.getAttribute("data-blend-src");
-        if (!agree.checked) return setNote("Tick the 21+ and terms box below to continue.");
-        if (!src || !safe(src)) return setNote("Checkout opens soon. Follow us for the ticket drop.");
+        if (!src || !safe(src)) return note("Ticket sales open soon.");
         var f = document.createElement("iframe");
         f.src = src;
         f.title = "Project X tickets: secure checkout by Blend";
         f.allow = "payment *";
         f.referrerPolicy = "strict-origin-when-cross-origin";
         f.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation");
-        f.loading = "lazy";
         f.className = "absolute inset-0 h-full w-full border-0 bg-white";
         box.replaceChildren(f);
         box.classList.remove("border-dashed");
       }
-      function setNote(t) {
-        box.innerHTML = '<p class="px-6 text-center text-sm text-white/70"></p>';
-        box.firstChild.textContent = t;
-      }
-      document.querySelectorAll(".tier-btn").forEach(function (b) {
-        b.addEventListener("click", function () { tier = b.getAttribute("data-tier"); load(); document.getElementById("checkout").scrollIntoView({ behavior: "smooth" }); });
+      document.querySelectorAll(".tier").forEach(function (b) {
+        b.addEventListener("click", function () {
+          tier = b.getAttribute("data-tier");
+          document.querySelectorAll(".tier").forEach(function (x) { x.setAttribute("aria-checked", String(x === b)); });
+          load();
+          document.getElementById("checkout").scrollIntoView({ behavior: "smooth", block: "start" });
+        });
       });
       agree.addEventListener("change", load);
     })();

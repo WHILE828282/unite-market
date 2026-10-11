@@ -8,6 +8,7 @@ The site is static HTML (Tailwind via CDN) in this repo:
 | `/terms` | `terms.html` |
 | `/refunds` | `refunds.html` |
 | `/privacy` | `privacy.html` |
+| shared styles, theme | `site.css`, `theme.js` |
 | headers, clean URLs | `vercel.json` |
 
 Before going live, replace every `[LEGAL ENTITY NAME]`, `[TRADE LICENCE NO.]`, `[ISSUING AUTHORITY]`, `[PHONE / WHATSAPP]` and `[REGISTERED ADDRESS]` in all four HTML files (`grep -rn "\[" *.html`). Stripe and Blend reviewers check that the footer names a real business with a reachable contact.

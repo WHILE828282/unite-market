@@ -1,0 +1,31 @@
+/* Shared with uniteuow.com: system font, iPhone safe areas, press feedback and motion. */
+html { background: #f2f2f7; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+html.dark { background: #000; color-scheme: dark; }
+html, body { overflow-x: clip; }
+body { margin: 0; overflow-wrap: break-word; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+:is(h1, h2, h3) { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; letter-spacing: -0.022em; }
+button, a, label, input { touch-action: manipulation; }
+.u-safe-top { padding-top: env(safe-area-inset-top, 0px); }
+.u-btn { transition: all .2s cubic-bezier(.2,.8,.2,1); }
+.u-btn:not(:disabled):active { transform: scale(.95); }
+.u-card { transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .2s, border-color .2s; }
+@media (hover: hover) and (pointer: fine) { .u-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -12px rgba(15,23,42,.22); } }
+.u-hero-glow { background: radial-gradient(circle, rgba(196, 90, 104, .45), transparent 68%); opacity: .7; }
+.u-header { background: rgba(251, 250, 248, .86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.dark .u-header { background: rgba(0, 0, 0, .78); }
+@keyframes uUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.u-rise { animation: uUp .45s cubic-bezier(.2,.8,.2,1) backwards; }
+.u-toggle .u-sun, .dark .u-toggle .u-moon { opacity: 0; transform: rotate(-90deg) scale(.5); }
+.dark .u-toggle .u-sun { opacity: 1; transform: none; }
+.u-toggle span { transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s; }
+@media (prefers-reduced-motion: reduce) { .u-rise { animation: none; } html { scroll-behavior: auto; } }
+
+/* Legal pages */
+.legal h2 { margin-top: 2rem; font-size: 1.125rem; font-weight: 700; color: #0f172a; }
+.legal p, .legal li { margin-top: .6rem; line-height: 1.7; color: #475569; }
+.legal ul { list-style: disc; padding-left: 1.25rem; }
+.legal a { color: #8c1d32; text-decoration: underline; text-underline-offset: 3px; }
+.legal strong { color: #0f172a; }
+.dark .legal h2, .dark .legal strong { color: #f5f5f7; }
+.dark .legal p, .dark .legal li { color: #a1a1aa; }
+.dark .legal a { color: #e9b6bc; }
