@@ -97,7 +97,7 @@
       <aside id="tickets" class="mt-8 scroll-mt-20 lg:mt-0">
         <div class="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10 lg:sticky lg:top-24">
           <h2 class="text-lg font-bold tracking-tight">Tickets</h2>
-          <div id="tier-list" class="mt-1"></div>
+          <div id="tier-list"></div>
           <div class="mt-3 flex items-baseline justify-between border-t border-slate-200/70 pt-4 dark:border-white/[0.07]">
             <span class="text-slate-500 dark:text-slate-400">Total</span>
             <span class="text-xl font-bold tabular-nums"><span data-total>0</span> AED</span>
@@ -185,10 +185,10 @@
       // Ticket types. Prices are for display; Blend charges the real price, so keep these the same as in Blend.
       // soldOut: true greys a ticket type out (e.g. when Early Bird is gone).
       var GROUPS = [
-        { name: "Early Bird", note: "First 100 tickets", badge: "Limited", soldOut: false, items: [["early-gents", "Gents", 80], ["early-ladies", "Ladies", 40]] },
-        { name: "Regular", note: "General admission", items: [["regular-gents", "Gents", 100], ["regular-ladies", "Ladies", 50]] },
-        { name: "Group of 4", note: "4 entries on one ticket, for you and 3 friends", per: "per group", items: [["group-gents", "Gents", 340], ["group-ladies", "Ladies", 170]] },
-        { name: "VIP", note: "VIP area and fast-track entry", items: [["vip-gents", "Gents", 200], ["vip-ladies", "Ladies", 150]] },
+        { name: "Early Bird", note: "First 100 tickets only", badge: "Limited", soldOut: false, items: [["early-male", "Male", 80], ["early-female", "Female", 40]] },
+        { name: "General Admission", note: "Standard entry", items: [["ga-male", "Male", 100], ["ga-female", "Female", 50]] },
+        { name: "Group of 4", note: "Entry for 4 people, any mix", badge: "Best value", items: [["group-4", "4 people", 300]] },
+        { name: "VIP", note: "VIP area and fast-track entry", items: [["vip-male", "Male", 200], ["vip-female", "Female", 150]] },
       ];
       var TIERS = {}, cart = {}, MAX = 10;
       GROUPS.forEach(function (g) { g.items.forEach(function (it) { TIERS[it[0]] = { group: g, name: it[1], price: it[2] }; cart[it[0]] = 0; }); });
@@ -198,14 +198,14 @@
 
       var stepCls = "u-btn flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-lg font-semibold text-slate-700 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200";
       document.getElementById("tier-list").innerHTML = GROUPS.map(function (g) {
-        return '<div class="border-b border-slate-200/70 py-4 last:border-0 dark:border-white/[0.07]' + (g.soldOut ? " opacity-50" : "") + '">' +
+        return '<div class="mt-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200/60 dark:bg-[#121214] dark:ring-white/[0.06]' + (g.soldOut ? " opacity-50" : "") + '">' +
           '<div class="flex items-center gap-2"><p class="font-bold">' + g.name + "</p>" +
           (g.soldOut ? '<span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-500 dark:bg-[#2c2c2e] dark:text-slate-400">Sold out</span>'
             : g.badge ? '<span class="rounded-full bg-crimson-50 px-2 py-0.5 text-[11px] font-semibold text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200">' + g.badge + "</span>" : "") +
-          '</div><p class="text-sm text-slate-500 dark:text-slate-400">' + g.note + "</p>" +
+          '</div><p class="text-xs text-slate-500 dark:text-slate-400">' + g.note + "</p>" +
           g.items.map(function (it) {
             return '<div class="mt-2 flex items-center justify-between gap-3" data-tier="' + it[0] + '">' +
-              '<p><span class="font-medium">' + it[1] + '</span> <span class="text-sm tabular-nums text-slate-500 dark:text-slate-400">· ' + it[2] + " AED" + (g.per ? " " + g.per : "") + "</span></p>" +
+              '<p class="text-sm"><span class="font-medium">' + it[1] + '</span><span class="block font-bold tabular-nums">' + it[2] + " AED</span></p>" +
               '<div class="flex items-center gap-1">' +
               '<button type="button" data-step="-1" aria-label="Fewer ' + g.name + " " + it[1] + ' tickets" class="' + stepCls + '">−</button>' +
               '<span data-qty class="w-7 text-center font-semibold tabular-nums" aria-live="polite">0</span>' +
@@ -246,7 +246,7 @@
       function openSheet() {
         if (!count()) return document.getElementById("tickets").scrollIntoView({ behavior: "smooth" });
         var html = '<div class="mb-2 font-semibold">Project X · Sun 25 Oct, 17:00</div>';
-        Object.keys(TIERS).forEach(function (k) { if (cart[k]) html += row(TIERS[k].group.name + " · " + TIERS[k].name + " × " + cart[k], (cart[k] * TIERS[k].price).toFixed(2) + " AED"); });
+        Object.keys(TIERS).forEach(function (k) { if (cart[k]) html += row(TIERS[k].group.name + (TIERS[k].group.items.length > 1 ? " · " + TIERS[k].name : "") + " × " + cart[k], (cart[k] * TIERS[k].price).toFixed(2) + " AED"); });
         html += row("Total", total().toFixed(2) + " AED", true);
         document.getElementById("summary").innerHTML = html;
         agree.checked = false; pay.disabled = true; pay.classList.remove("hidden");
