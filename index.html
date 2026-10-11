@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Project X · Unite</title>
-  <meta name="description" content="Project X: Interuniversity Student Rave. Sunday 25 October 2026, 17:00–23:00, JVC, Dubai. Tickets on unite.market." />
+  <meta name="description" content="Project X: Interuniversity Student Rave. Sunday 25 October 2026 from 8:00 PM, JVC, Dubai. Tickets on unite.market." />
   <meta property="og:title" content="Project X · Interuniversity Student Rave" />
-  <meta property="og:description" content="Sun 25 Oct 2026 · 17:00–23:00 · JVC, Dubai" />
+  <meta property="og:description" content="Sun 25 Oct 2026 · from 8:00 PM · JVC, Dubai" />
   <meta property="og:url" content="https://unite.market" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://unite.market/project-x.jpg" />
@@ -43,35 +43,41 @@
 
       <!-- Event -->
       <div class="u-rise min-w-0">
-        <!-- Event poster: blurred copy fills the frame, the poster itself is shown whole -->
-        <div class="relative isolate overflow-hidden rounded-3xl bg-black shadow-xl ring-1 ring-white/10">
-          <img src="/project-x.webp" alt="" aria-hidden="true" class="absolute inset-0 -z-10 h-full w-full scale-110 object-cover opacity-60 blur-2xl" />
-          <img src="/project-x.webp" alt="Project X poster: October 25th, house party at a private villa" width="1200" height="1607"
-            class="mx-auto block max-h-[78vh] w-auto max-w-full sm:max-h-[640px]" fetchpriority="high" />
+        <!-- Poster + key facts, side by side from tablet width up -->
+        <div class="sm:grid sm:grid-cols-[240px_1fr] sm:items-start sm:gap-6">
+          <img src="/project-x.webp" alt="Project X poster" width="1200" height="1607" fetchpriority="high"
+            class="mx-auto block w-full max-w-[340px] rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 sm:max-w-none" />
+          <div class="mt-5 sm:mt-0">
+            <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Project X</h1>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Interuniversity house party · by Unite</p>
+            <ul class="mt-5 space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-crimson-700 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:text-crimson-200 dark:shadow-none dark:ring-white/10">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+                </span>
+                <div><p class="font-semibold">Sunday, 25 October 2026</p><p class="text-sm text-slate-500 dark:text-slate-400">From 8:00 PM · <span id="starts-in">Starts soon</span></p></div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-crimson-700 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:text-crimson-200 dark:shadow-none dark:ring-white/10">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                </span>
+                <div><p class="font-semibold">Private villa, JVC</p><p class="text-sm text-slate-500 dark:text-slate-400">Jumeirah Village Circle, Dubai · exact location sent with your ticket</p></div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-crimson-700 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:text-crimson-200 dark:shadow-none dark:ring-white/10">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </span>
+                <div><p class="font-semibold">Live DJ, drinks &amp; food</p><p class="text-sm text-slate-500 dark:text-slate-400">Included in your ticket</p></div>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <h1 class="mt-5 text-2xl font-bold tracking-tight sm:text-3xl">Project X: Interuniversity Student Rave</h1>
-        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">by Unite</p>
-
-        <ul class="mt-5 space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-crimson-700 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:text-crimson-200 dark:shadow-none dark:ring-white/10">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
-            </span>
-            <div><p class="font-semibold">Sunday, 25 October 2026</p><p class="text-sm text-slate-500 dark:text-slate-400">17:00 – 23:00 · <span id="starts-in">Starts soon</span></p></div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-crimson-700 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:text-crimson-200 dark:shadow-none dark:ring-white/10">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            </span>
-            <div><p class="font-semibold">Secret mansion, JVC</p><p class="text-sm text-slate-500 dark:text-slate-400">Jumeirah Village Circle, Dubai · exact location sent with your ticket</p></div>
-          </li>
-        </ul>
 
         <section class="mt-8">
           <h2 class="text-lg font-bold tracking-tight">About</h2>
           <div class="mt-2 space-y-3 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
-            <p>Students from AUD, Middlesex, Heriot-Watt, UOWD and more, together under one roof. Project X takes over a private mansion in JVC for one night: DJs, lights and students from across Dubai.</p>
+            <p>Students from AUD, Middlesex, Heriot-Watt, UOWD and more, together under one roof. Project X takes over a private villa in JVC for one night: live DJ, lights, drinks and food, and students from across Dubai.</p>
+            <p>Drinks and food are included in the ticket. Alcohol is served by the licensed bar team of our event partner Cover Page Agency, to guests 21 and over only.</p>
             <p>Your QR ticket arrives by email right after payment. Show it at the door.</p>
           </div>
         </section>
@@ -167,8 +173,8 @@
 
   <script>
     (function () {
-      // "Starts in" line, counting down to 25 Oct 2026, 17:00 Dubai time (UTC+4).
-      var start = Date.parse("2026-10-25T17:00:00+04:00"), end = Date.parse("2026-10-25T23:00:00+04:00");
+      // "Starts in" line, counting down to 25 Oct 2026, 8:00 PM Dubai time (UTC+4).
+      var start = Date.parse("2026-10-25T20:00:00+04:00"), end = Date.parse("2026-10-26T03:00:00+04:00");
       function startsIn() {
         var now = Date.now(), left = start - now, el = document.getElementById("starts-in");
         if (now >= end) return (el.textContent = "Ended");
@@ -241,7 +247,7 @@
       }
       function openSheet() {
         if (!count()) return document.getElementById("tickets").scrollIntoView({ behavior: "smooth" });
-        var html = '<div class="mb-2 font-semibold">Project X · Sun 25 Oct, 17:00</div>';
+        var html = '<div class="mb-2 font-semibold">Project X · Sun 25 Oct, 8:00 PM</div>';
         Object.keys(TIERS).forEach(function (k) { if (cart[k]) html += row(TIERS[k].group.name + (TIERS[k].group.items.length > 1 ? " · " + TIERS[k].name : "") + " × " + cart[k], (cart[k] * TIERS[k].price).toFixed(2) + " AED"); });
         html += row("Total", total().toFixed(2) + " AED", true);
         document.getElementById("summary").innerHTML = html;
