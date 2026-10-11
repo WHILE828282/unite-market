@@ -5,8 +5,10 @@
 import { neon } from "@neondatabase/serverless";
 import { POOLS, HOLD_MINUTES } from "./_tickets.js";
 
+// Vercel's Neon integration sets DATABASE_URL / POSTGRES_URL, or <PREFIX>_DATABASE_URL when a custom prefix was chosen.
 const NAMES = ["DATABASE_URL", "POSTGRES_URL", "NEON_DATABASE_URL"];
-const url = () => NAMES.map((n) => process.env[n]).find(Boolean);
+const url = () => NAMES.map((n) => process.env[n]).find(Boolean)
+  || Object.keys(process.env).filter((k) => /(^|_)(DATABASE_URL|POSTGRES_URL)$/.test(k)).map((k) => process.env[k]).find((v) => /^postgres(ql)?:\/\//.test(String(v || "")));
 export const dbConfigured = () => !!url();
 
 let client, ready;
