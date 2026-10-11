@@ -104,37 +104,46 @@
           <div class="flex items-center gap-2">
             <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-crimson-50 text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200"><i data-icon="music" class="h-4 w-4"></i></span>
             <h2 class="text-lg font-bold tracking-tight">On the playlist</h2>
+            <span class="ml-auto text-xs text-slate-500 dark:text-slate-400">Tap to play a preview</span>
           </div>
           <ol class="mt-3 divide-y divide-slate-200/70 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200/80 dark:divide-white/[0.07] dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
-            <li class="flex items-center gap-3 px-4 py-3">
-              <span class="w-4 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-400">1</span>
+            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Kid Cudi Pursuit of Happiness Steve Aoki">
+              <button type="button" data-play aria-label="Play a preview of Pursuit of Happiness (Steve Aoki Remix)" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
               <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Pursuit of Happiness (Steve Aoki Remix)</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Kid Cudi</p></div>
               <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">From the film</span>
+              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Pursuit of Happiness (Steve Aoki Remix) in Apple Music">Apple Music ↗</a>
+              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
             </li>
-            <li class="flex items-center gap-3 px-4 py-3">
-              <span class="w-4 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-400">2</span>
+            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Yeah Yeah Yeahs Heads Will Roll A-Trak">
+              <button type="button" data-play aria-label="Play a preview of Heads Will Roll (A-Trak Remix)" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
               <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Heads Will Roll (A-Trak Remix)</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Yeah Yeah Yeahs</p></div>
               <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">From the film</span>
+              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Heads Will Roll (A-Trak Remix) in Apple Music">Apple Music ↗</a>
+              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
             </li>
-            <li class="flex items-center gap-3 px-4 py-3">
-              <span class="w-4 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-400">3</span>
+            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="LMFAO Party Rock Anthem">
+              <button type="button" data-play aria-label="Play a preview of Party Rock Anthem" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
               <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Party Rock Anthem</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">LMFAO</p></div>
-              
+              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Party Rock Anthem in Apple Music">Apple Music ↗</a>
+              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
             </li>
-            <li class="flex items-center gap-3 px-4 py-3">
-              <span class="w-4 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-400">4</span>
+            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Flo Rida Low T-Pain">
+              <button type="button" data-play aria-label="Play a preview of Low" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
               <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Low</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Flo Rida ft. T-Pain</p></div>
-              
+              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Low in Apple Music">Apple Music ↗</a>
+              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
             </li>
-            <li class="flex items-center gap-3 px-4 py-3">
-              <span class="w-4 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-400">5</span>
+            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="50 Cent In Da Club">
+              <button type="button" data-play aria-label="Play a preview of In Da Club" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
               <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">In Da Club</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">50 Cent</p></div>
-              
+              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open In Da Club in Apple Music">Apple Music ↗</a>
+              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
             </li>
-            <li class="flex items-center gap-3 px-4 py-3">
-              <span class="w-4 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-400">6</span>
+            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="DJ Snake Lil Jon Turn Down for What">
+              <button type="button" data-play aria-label="Play a preview of Turn Down for What" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
               <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Turn Down for What</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">DJ Snake &amp; Lil Jon</p></div>
-              
+              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Turn Down for What in Apple Music">Apple Music ↗</a>
+              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
             </li>
           </ol>
         </div>
@@ -358,6 +367,40 @@
       }
       loadStock(); setInterval(loadStock, 30000);
       document.addEventListener("visibilitychange", function () { if (!document.hidden) loadStock(); });
+
+      // Playlist: 30-second previews from Apple Music (/api/preview), one at a time.
+      (function () {
+        var audio = new Audio(), current = null, found = {};
+        audio.preload = "none";
+        function state(li, s) {
+          var b = li.querySelector("[data-play]");
+          ["play", "pause", "load"].forEach(function (k) { b.querySelector('[data-i="' + k + '"]').classList.toggle("hidden", k !== (s === "playing" ? "pause" : s === "loading" ? "load" : "play")); });
+          b.classList.toggle("!bg-crimson-700", s === "playing"); b.classList.toggle("!text-white", s === "playing");
+          if (s !== "playing") li.querySelector("[data-progress]").style.width = s === "paused" ? li.querySelector("[data-progress]").style.width : "0";
+        }
+        function stop() { if (current) { audio.pause(); state(current, "idle"); current = null; } }
+        function play(li, url) { current = li; audio.src = url; audio.play().then(function () { state(li, "playing"); }).catch(function () { state(li, "idle"); current = null; }); }
+        $$("[data-track]").forEach(function (li) {
+          var btn = li.querySelector("[data-play]"), q = li.getAttribute("data-q");
+          btn.addEventListener("click", function () {
+            if (current === li) { if (audio.paused) { audio.play(); state(li, "playing"); } else { audio.pause(); state(li, "paused"); } return; }
+            stop();
+            if (found[q]) return play(li, found[q]);
+            current = li; state(li, "loading");
+            fetch("/api/preview?q=" + encodeURIComponent(q)).then(function (r) { return r.json(); }).then(function (j) {
+              if (!j || !j.found) throw new Error("none");
+              found[q] = j.preview;
+              if (j.open) { var a = li.querySelector("[data-open]"); a.href = j.open; a.classList.remove("hidden"); }
+              if (current === li) play(li, j.preview);
+            }).catch(function () {
+              if (current === li) { state(li, "idle"); current = null; }
+              btn.disabled = true; btn.title = "Preview not available";
+            });
+          });
+        });
+        audio.addEventListener("timeupdate", function () { if (current && audio.duration) current.querySelector("[data-progress]").style.width = (audio.currentTime / audio.duration * 100) + "%"; });
+        audio.addEventListener("ended", function () { if (current) { state(current, "idle"); current = null; } });
+      })();
 
       // Came back from Stripe without paying: free the held places straight away.
       var params = new URLSearchParams(location.search);
