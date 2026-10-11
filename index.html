@@ -9,7 +9,7 @@
   <meta property="og:description" content="Sun 25 Oct 2026 · 17:00–23:00 · JVC, Dubai" />
   <meta property="og:url" content="https://unite.market" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://unite.market/icons/market-icon.jpg" />
+  <meta property="og:image" content="https://unite.market/project-x.jpg" />
   <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
@@ -43,15 +43,11 @@
 
       <!-- Event -->
       <div class="u-rise min-w-0">
-        <!-- Cover (swap for the event poster: <img src="/project-x.webp" class="h-full w-full object-cover" alt="">) -->
-        <div class="relative isolate aspect-[16/9] overflow-hidden rounded-3xl text-white shadow-xl ring-1 ring-white/10"
-          style="background: radial-gradient(120% 90% at 100% 0%, rgba(196,90,104,.55), transparent 55%), radial-gradient(90% 80% at 0% 100%, rgba(116,22,41,.6), transparent 60%), linear-gradient(160deg, #111827 0%, #0a0f1d 100%)">
-          <span class="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]" aria-hidden="true"
-            style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 28px 28px"></span>
-          <div class="flex h-full flex-col justify-end p-5 sm:p-7">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-crimson-200">Interuniversity student rave</p>
-            <p class="mt-1 text-5xl font-extrabold leading-none tracking-tight sm:text-7xl">Project X</p>
-          </div>
+        <!-- Event poster: blurred copy fills the frame, the poster itself is shown whole -->
+        <div class="relative isolate overflow-hidden rounded-3xl bg-black shadow-xl ring-1 ring-white/10">
+          <img src="/project-x.webp" alt="" aria-hidden="true" class="absolute inset-0 -z-10 h-full w-full scale-110 object-cover opacity-60 blur-2xl" />
+          <img src="/project-x.webp" alt="Project X poster: October 25th, house party at a private villa" width="1200" height="1607"
+            class="mx-auto block max-h-[78vh] w-auto max-w-full sm:max-h-[640px]" fetchpriority="high" />
         </div>
 
         <h1 class="mt-5 text-2xl font-bold tracking-tight sm:text-3xl">Project X: Interuniversity Student Rave</h1>
