@@ -8,19 +8,19 @@ export const POOLS = { event: 1000, early: 100 };
 
 export const GROUPS = [
   { name: "Early Bird", note: "First 100 tickets only", badge: "Limited", types: [
-    { id: "early-male", name: "Male", price: 80, uses: { event: 1, early: 1 } },
     { id: "early-female", name: "Female", price: 40, uses: { event: 1, early: 1 } },
+    { id: "early-male", name: "Male", price: 80, uses: { event: 1, early: 1 } },
   ] },
   { name: "General Admission", note: "Standard entry", types: [
-    { id: "ga-male", name: "Male", price: 100, uses: { event: 1 } },
     { id: "ga-female", name: "Female", price: 50, uses: { event: 1 } },
+    { id: "ga-male", name: "Male", price: 100, uses: { event: 1 } },
   ] },
   { name: "Group of 4", note: "Entry for 4 people, any mix", badge: "Best value", types: [
     { id: "group-4", name: "4 people", price: 300, uses: { event: 4 } },
   ] },
   { name: "VIP", note: "VIP area and fast-track entry", types: [
-    { id: "vip-male", name: "Male", price: 200, uses: { event: 1 } },
     { id: "vip-female", name: "Female", price: 150, uses: { event: 1 } },
+    { id: "vip-male", name: "Male", price: 200, uses: { event: 1 } },
   ] },
 ];
 
