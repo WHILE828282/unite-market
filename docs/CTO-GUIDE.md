@@ -11,7 +11,7 @@ The site is static HTML (Tailwind via CDN) in this repo:
 | shared styles, theme | `site.css`, `theme.js` |
 | headers, clean URLs | `vercel.json` |
 
-Before going live, replace every `[LEGAL ENTITY NAME]`, `[TRADE LICENCE NO.]`, `[ISSUING AUTHORITY]`, and `[REGISTERED ADDRESS]` in all four HTML files (`grep -rn "\[" *.html`). Stripe and Blend reviewers check that the footer names a real business with a reachable contact.
+The footer and Terms name the operator as "Unite, Dubai, United Arab Emirates". Keep the business name and statement descriptor in Stripe/Blend as "Unite" so they match the site. Once Unite has a trade licence, add the legal name and licence number to the footer and to section 1 of the Terms.
 
 ---
 
