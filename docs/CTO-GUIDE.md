@@ -41,13 +41,13 @@ Same host as uniteuow.com.
 
    If Vercel's Domains page shows different, project-specific values, use those. Delete any existing A/AAAA records on `@` and any parking/forwarding the registrar added, or the domain will flap between hosts.
 4. Wait for Vercel to show **Valid Configuration**. It issues the HTTPS certificate itself. Check: `dig +short unite.market A` → `76.76.21.21`, and `curl -I https://unite.market` → `200`.
-5. **Email, so support@unite.market works and ticket mail isn't spam.** In Google Workspace, Zoho or another provider, add their MX records, then:
+5. **Email, so support@uniteuow.com works and ticket mail isn't spam.** In Google Workspace, Zoho or another provider, add their MX records, then:
 
    | Type | Host | Value |
    |---|---|---|
    | TXT | `@` | `v=spf1 include:<your provider's SPF> ~all` |
    | TXT / CNAME | (provider's DKIM selector) | (provider's DKIM key) |
-   | TXT | `_dmarc` | `v=DMARC1; p=quarantine; rua=mailto:support@unite.market` |
+   | TXT | `_dmarc` | `v=DMARC1; p=quarantine; rua=mailto:support@uniteuow.com` |
 
    If Blend sends tickets "from" @unite.market, add its sending domain records too. Stripe checks that the support address on the site receives mail.
 6. Optional: a CAA record `0 issue "letsencrypt.org"` so only Vercel's CA can issue certificates for the domain.
