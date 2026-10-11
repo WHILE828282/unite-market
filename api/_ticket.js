@@ -22,6 +22,10 @@ export const newTicketId = () => "UNT-2026-" + Array.from(crypto.randomBytes(5),
 // Order ids (the secret part of the success link).
 export const newId = () => crypto.randomBytes(15).toString("base64url").replace(/[-_]/g, "x"); // 20 letters/digits
 
+// Ticket colour by type, as in the Unite app: blue for male tickets, pink for female (Group of 4 stays dark).
+export const TONES = { male: { bg: "#2563eb", label: "Male" }, female: { bg: "#db2777", label: "Female" } };
+export const toneOf = (label) => (/Female$/.test(String(label || "")) ? "female" : /Male$/.test(String(label || "")) ? "male" : "");
+
 export const people = (items) => Object.entries(items).reduce((n, [id, q]) => n + q * (TYPES[id] ? TYPES[id].uses.event : 1), 0);
 
 // One ticket per person. Group of 4 -> 4 tickets at a quarter of the price each.
@@ -55,9 +59,9 @@ const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&":
 export async function sendTicket(order, tickets, origin) {
   if (!process.env.RESEND_API_KEY || !order.email || !tickets.length) return false;
   const link = `${origin}/success?order=${order.id}`;
-  const cards = tickets.map((t, i) => `
-  <div style="margin:16px 0;border-radius:20px;overflow:hidden;background:#ffffff;border:1px solid #e2e8f0">
-    <div style="background:#0f172a;color:#fff;padding:12px 18px;font-size:13px"><b>unite</b> <span style="color:#94a3b8;letter-spacing:.12em;text-transform:uppercase;font-size:11px">· Admit one</span><span style="float:right;background:#10b981;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:600">Confirmed</span></div>
+  const cards = tickets.map((t, i) => { const tone = TONES[toneOf(t.label)]; return `
+  <div style="margin:16px 0;border-radius:20px;overflow:hidden;background:#ffffff;border:${tone ? `2px solid ${tone.bg}` : "1px solid #e2e8f0"}">
+    <div style="background:${tone ? tone.bg : "#0f172a"};color:#fff;padding:12px 18px;font-size:13px"><b>unite</b> <span style="color:${tone ? "rgba(255,255,255,.85)" : "#94a3b8"};letter-spacing:.12em;text-transform:uppercase;font-size:11px">· ${tone ? esc(tone.label) : "Admit one"}</span><span style="float:right;background:#10b981;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:600">Confirmed</span></div>
     <div style="padding:18px;text-align:center">
       <p style="margin:0;font-weight:700;color:#0f172a">${esc(EVENT.name)} · ${esc(t.label)}</p>
       <p style="margin:4px 0 14px;color:#64748b;font-size:13px">Ticket ${i + 1} of ${tickets.length}</p>
@@ -65,7 +69,7 @@ export async function sendTicket(order, tickets, origin) {
       <p style="margin:12px 0 0;color:#94a3b8;font-size:11px;letter-spacing:.14em;text-transform:uppercase">Booking ID</p>
       <p style="margin:2px 0 0;font-family:ui-monospace,Menlo,monospace;font-size:18px;font-weight:700;letter-spacing:.06em;color:#0f172a">${esc(t.id)}</p>
     </div>
-  </div>`).join("");
+  </div>`; }).join("");
   const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:440px;margin:0 auto;padding:24px;color:#0f172a;background:#f2f2f7">
   <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#741629">You're in</p>
   <h1 style="margin:6px 0 4px;font-size:26px">${esc(EVENT.name)}</h1>

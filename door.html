@@ -86,6 +86,8 @@
       var $ = function (s) { return document.querySelector(s); };
       var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
       var clock = function (v) { return new Date(v).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Dubai" }); };
+      var TONES = { male: "#2563eb", female: "#db2777" }; // ticket colours: blue male, pink female
+      var toneBadge = function (t, big) { return TONES[t.tone] ? '<span class="shrink-0 rounded-' + (big ? "xl px-3 py-2 text-sm ring-2 ring-white/70" : "full px-2 py-0.5 text-[11px]") + ' font-extrabold uppercase tracking-wide text-white" style="background:' + TONES[t.tone] + '">' + (t.tone === "female" ? "Female" : "Male") + "</span>" : ""; };
       var KEY = "";
       try { KEY = sessionStorage.getItem("px-door") || ""; } catch (e) {}
       var list = [], recent = {}, flashTimer, stream, timer, scanning = false;
@@ -109,7 +111,7 @@
         var term = $("#q").value.trim().toLowerCase();
         var shown = list.filter(function (t) { return !term || [t.name, t.email, t.id, t.label].some(function (v) { return String(v || "").toLowerCase().indexOf(term) >= 0; }); });
         $("#list").innerHTML = shown.slice(0, 300).map(function (t) {
-          return '<li class="flex items-center gap-3 py-3"><div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">' + esc(t.name || t.email || "Guest") + '</p>' +
+          return '<li class="flex items-center gap-3 py-3"><div class="min-w-0 flex-1"><p class="flex min-w-0 items-center gap-1.5 text-sm font-semibold"><span class="truncate">' + esc(t.name || t.email || "Guest") + "</span>" + toneBadge(t) + "</p>" +
             '<p class="truncate text-xs text-slate-500 dark:text-slate-400">' + esc(t.label) + " · " + esc(t.id) + "</p></div>" +
             (t.refunded ? '<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500 dark:bg-[#2c2c2e]">Refunded</span>'
               : t.checkedIn ? '<span class="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-500/30">In · ' + clock(t.checkedIn) + "</span>"
@@ -118,18 +120,18 @@
         $("#empty").textContent = list.length ? "No one matches that search." : "No tickets sold yet.";
         $("#empty").classList.toggle("hidden", shown.length > 0);
       }
-      function show(tone, title, text) {
+      function show(tone, title, text, who) {
         var f = $("#flash");
         f.className = "u-rise flex items-center gap-3 rounded-2xl px-4 py-3 text-white " + (tone === "ok" ? "bg-emerald-600" : "bg-rose-600");
-        f.innerHTML = '<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-bold">' + (tone === "ok" ? "✓" : "✕") + '</span><span class="min-w-0"><span class="block font-bold">' + esc(title) + '</span><span class="block truncate text-sm text-white/90">' + esc(text) + "</span></span>";
+        f.innerHTML = '<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-bold">' + (tone === "ok" ? "✓" : "✕") + '</span><span class="min-w-0 flex-1"><span class="block font-bold">' + esc(title) + '</span><span class="block truncate text-sm text-white/90">' + esc(text) + "</span></span>" + (who ? toneBadge(who, true) : "");
         clearTimeout(flashTimer); flashTimer = setTimeout(function () { f.className = "hidden"; }, 3500);
       }
       function result(r) {
         if (!r.ok) return show("bad", "Couldn't check in", r.error || "Try again.");
         var a = r.attendee, who = a ? (a.name || a.email || "Guest") + " · " + a.label : "";
         if (a) list = list.map(function (t) { return t.id === a.id ? a : t; });
-        if (r.result === "ok") show("ok", "Checked in", who);
-        else if (r.result === "used") show("bad", "Already used", who + (a && a.checkedIn ? " · in at " + clock(a.checkedIn) : ""));
+        if (r.result === "ok") show("ok", "Checked in", who, a);
+        else if (r.result === "used") show("bad", "Already used", who + (a && a.checkedIn ? " · in at " + clock(a.checkedIn) : ""), a);
         else show("bad", "Invalid", r.reason || "Not a ticket for this event.");
         render();
       }

@@ -2,11 +2,11 @@
    GET  ?key=DOOR_KEY                     -> every ticket with its check-in state, plus totals
    POST { key, code } or { key, id }      -> ok (checked in now) | used (already in) | invalid */
 import { dbConfigured, ensureSchema, getTicket, checkIn, allTickets, getOrder } from "./_db.js";
-import { parseTicketCode, isTicketId, same } from "./_ticket.js";
+import { parseTicketCode, isTicketId, same, toneOf } from "./_ticket.js";
 import { body, methodOk } from "./_http.js";
 
 const keyOk = (k) => !!process.env.DOOR_KEY && same(String(process.env.DOOR_KEY).trim(), String(k || "").trim());
-const view = (t, o) => ({ id: t.id, label: t.label, name: t.name || (o && o.name) || "", email: t.email || "", checkedIn: t.checked_in_at, refunded: t.status !== "valid" });
+const view = (t, o) => ({ id: t.id, label: t.label, tone: toneOf(t.label), name: t.name || (o && o.name) || "", email: t.email || "", checkedIn: t.checked_in_at, refunded: t.status !== "valid" });
 
 export default async function handler(req, res) {
   if (!methodOk(req, res, ["GET", "POST"])) return;
