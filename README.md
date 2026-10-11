@@ -7,7 +7,7 @@ Static HTML + Tailwind CDN in the uniteuow.com style (navy/crimson palette, Unit
 - `index.html`: landing page
 - `terms.html`, `refunds.html`, `privacy.html`: legal pages (`/terms`, `/refunds`, `/privacy`)
 - `theme.js`, `site.css`: shared Tailwind config (Unite palette), theme toggle and base styles
-- `icons/`: Unite logo and icons from uniteuow.com
+- `icons/`: Unite Market logo (`market-icon.jpg`, 1024 px original) and favicons
 - `vercel.json`: clean URLs and security headers (CSP allows Blend + Stripe only)
 - `docs/CTO-GUIDE.md`: launch blockers, DNS, Blend embed, UOWD discount logic
 
