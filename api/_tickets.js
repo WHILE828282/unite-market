@@ -7,7 +7,7 @@ export const EVENT = { id: "halloween-on-deck", name: "Halloween on Deck", when:
 export const POOLS = { event: 1000, early: 100 };
 
 // Prices as on the organiser's page (Upper Deck DXB): released in phases, plus a 10% booking fee per order.
-// Only the current phase is on sale. Move to the next one with TICKET_PHASE=2, 3, ... in Vercel (then redeploy).
+// All phases are on sale together (as on the organiser's page), unless TICKET_PHASE is set in Vercel.
 export const PHASE = Math.max(1, Math.min(5, Math.floor(Number(process.env.TICKET_PHASE)) || 1));
 export const FEE_RATE = 0.1;
 // Our referral link to Upper Deck DXB's Ticket Tailor checkout: every "Get tickets" button opens it.
@@ -39,8 +39,9 @@ export const GROUPS = [
   ] },
 ];
 
-// "past" (sold out), "current" (on sale) or "upcoming"; groups without a phase are always on sale.
-export const stage = (g) => (!g.phase || g.phase === PHASE ? "current" : g.phase < PHASE ? "past" : "upcoming");
+// The organiser keeps every phase on sale at once, so every group is "current". To sell one phase at a time again,
+// set TICKET_PHASE in Vercel: earlier phases then show as sold out and later ones as next.
+export const stage = (g) => (!process.env.TICKET_PHASE || !g.phase || g.phase === PHASE ? "current" : g.phase < PHASE ? "past" : "upcoming");
 
 export const MAX_PER_ORDER = 10;
 export const HOLD_MINUTES = 15;
