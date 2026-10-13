@@ -1,6 +1,6 @@
 /* GET /api/stock -> the ticket catalog with how many of each type can still be bought.
    Also closes holds older than 15 minutes, so places come back on their own. */
-import { GROUPS, POOLS, MAX_PER_ORDER, HOLD_MINUTES, FEE_RATE, typesLeft, stage } from "./_tickets.js";
+import { GROUPS, POOLS, MAX_PER_ORDER, HOLD_MINUTES, FEE_RATE, REFERRAL_URL, typesLeft, stage } from "./_tickets.js";
 import { dbConfigured, ensureSchema, poolsLeft, sweepHolds } from "./_db.js";
 import { ticketsReady } from "./_ticket.js";
 import { stripeOn, expireSession } from "./_stripe.js";
@@ -24,7 +24,9 @@ export default async function handler(req, res) {
     }
   }
   // Referral link to the organiser's checkout (Ticket Tailor): every "Get tickets" button opens it.
-  const ticketsUrl = /^https:\/\/\S+$/.test(String(process.env.TICKETS_URL || "").trim()) ? String(process.env.TICKETS_URL).trim() : "";
+  // TICKETS_URL in Vercel overrides the link we were given.
+  const envUrl = String(process.env.TICKETS_URL || "").trim();
+  const ticketsUrl = /^https:\/\/\S+$/.test(envUrl) ? envUrl : REFERRAL_URL;
   const groups = GROUPS.map((g) => ({ name: g.name, note: g.note || "", badge: g.badge || "", stage: stage(g),
     types: g.types.map((t) => ({ id: t.id, name: t.name, price: t.price, left: left ? left[t.id] : 0 })) }));
   // Places at the door: for the availability bar.

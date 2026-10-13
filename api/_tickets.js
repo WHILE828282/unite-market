@@ -10,6 +10,8 @@ export const POOLS = { event: 1000, early: 100 };
 // Only the current phase is on sale. Move to the next one with TICKET_PHASE=2, 3, ... in Vercel (then redeploy).
 export const PHASE = Math.max(1, Math.min(5, Math.floor(Number(process.env.TICKET_PHASE)) || 1));
 export const FEE_RATE = 0.1;
+// Our referral link to Upper Deck DXB's Ticket Tailor checkout: every "Get tickets" button opens it.
+export const REFERRAL_URL = "https://www.tickettailor.com/events/dxbstudentevents/2454040/r/ilya";
 export const fee = (amount) => Math.round(amount * FEE_RATE * 100) / 100;
 
 export const GROUPS = [
