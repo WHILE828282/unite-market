@@ -98,68 +98,16 @@
           </div>
         </div>
 
-        <!-- Playlist -->
+        <!-- Playlist: rows are built by the script below from TRACKS, with cover art from Apple Music -->
         <div>
-          <div class="flex items-center gap-2">
-            <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-crimson-50 text-crimson-700 dark:bg-crimson-400/15 dark:text-crimson-200"><i data-icon="music" class="h-4 w-4"></i></span>
-            <h2 class="text-lg font-bold tracking-tight">On the playlist</h2>
-            <span class="ml-auto text-xs text-slate-500 dark:text-slate-400">Tap to play a preview</span>
+          <div class="flex items-end justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-bold tracking-tight">On the playlist</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">What the DJs are dropping on deck. Tap a cover to hear it.</p>
+            </div>
+            <span class="flex shrink-0 items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600 dark:bg-[#2c2c2e] dark:text-slate-300"><i data-icon="music" class="h-3.5 w-3.5"></i> <span data-track-count></span> tracks</span>
           </div>
-          <ol class="mt-3 divide-y divide-slate-200/70 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200/80 dark:divide-white/[0.07] dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Travis Scott FE!N Playboi Carti">
-              <button type="button" data-play aria-label="Play a preview of FE!N" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">FE!N</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Travis Scott ft. Playboi Carti</p></div>
-              <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">Viral on TikTok</span>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open FE!N in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Kanye West Ty Dolla Sign CARNIVAL">
-              <button type="button" data-play aria-label="Play a preview of CARNIVAL" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">CARNIVAL</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">¥$, Rich The Kid &amp; Playboi Carti</p></div>
-              <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">Popular</span>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open CARNIVAL in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Hanumankind Kalmi Big Dawgs">
-              <button type="button" data-play aria-label="Play a preview of Big Dawgs" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Big Dawgs</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Hanumankind &amp; Kalmi</p></div>
-              <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">Viral on TikTok</span>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Big Dawgs in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Central Cee Lil Baby BAND4BAND">
-              <button type="button" data-play aria-label="Play a preview of BAND4BAND" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">BAND4BAND</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Central Cee &amp; Lil Baby</p></div>
-              <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">Viral on TikTok</span>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open BAND4BAND in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Playboi Carti Sky">
-              <button type="button" data-play aria-label="Play a preview of Sky" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Sky</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Playboi Carti</p></div>
-              <span class="shrink-0 rounded-full bg-crimson-50 px-1.5 py-0.5 text-[11px] font-semibold text-crimson-700 ring-1 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30">Viral on TikTok</span>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Sky in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Travis Scott SICKO MODE">
-              <button type="button" data-play aria-label="Play a preview of SICKO MODE" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">SICKO MODE</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Travis Scott</p></div>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open SICKO MODE in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Sheck Wes Mo Bamba">
-              <button type="button" data-play aria-label="Play a preview of Mo Bamba" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Mo Bamba</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Sheck Wes</p></div>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Mo Bamba in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-            <li class="relative flex items-center gap-3 px-4 py-3" data-track data-q="Playboi Carti Magnolia">
-              <button type="button" data-play aria-label="Play a preview of Magnolia" class="u-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-40 dark:bg-[#2c2c2e] dark:text-slate-200 dark:hover:bg-[#3a3a3c]"><svg data-i="play" viewBox="0 0 24 24" class="h-4 w-4 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg><svg data-i="pause" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span data-i="load" class="u-spin hidden h-4 w-4 rounded-full border-2 border-current border-t-transparent"></span></button>
-              <div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">Magnolia</p><p class="truncate text-xs text-slate-500 dark:text-slate-400">Playboi Carti</p></div>
-              <a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 text-xs font-semibold text-crimson-700 hover:underline dark:text-crimson-200" aria-label="Open Magnolia in Apple Music">Apple Music ↗</a>
-              <span data-progress class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>
-            </li>
-          </ol>
+          <ol id="playlist" class="mt-3 overflow-hidden rounded-3xl bg-white p-1.5 shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10"></ol>
         </div>
 
         <!-- When, where, who -->
@@ -388,40 +336,86 @@
       loadStock(); setInterval(loadStock, 30000);
       document.addEventListener("visibilitychange", function () { if (!document.hidden) loadStock(); });
 
-      // Playlist: 30-second previews from Apple Music (/api/preview), one at a time.
+      // Playlist: 30-second previews from Apple Music (/api/preview), one at a time. Tagged tracks first.
       (function () {
-        var audio = new Audio(), current = null, found = {}, links = {};
+        var TRACKS = [
+          { q: "Travis Scott FE!N Playboi Carti", title: "FE!N", artist: "Travis Scott ft. Playboi Carti", tag: "tiktok" },
+          { q: "Kanye West Ty Dolla Sign CARNIVAL", title: "CARNIVAL", artist: "¥$, Rich The Kid & Playboi Carti", tag: "popular" },
+          { q: "Hanumankind Kalmi Big Dawgs", title: "Big Dawgs", artist: "Hanumankind & Kalmi", tag: "tiktok" },
+          { q: "Central Cee Lil Baby BAND4BAND", title: "BAND4BAND", artist: "Central Cee & Lil Baby", tag: "tiktok" },
+          { q: "Playboi Carti Sky", title: "Sky", artist: "Playboi Carti", tag: "tiktok" },
+          { q: "Travis Scott SICKO MODE", title: "SICKO MODE", artist: "Travis Scott" },
+          { q: "Sheck Wes Mo Bamba", title: "Mo Bamba", artist: "Sheck Wes" },
+          { q: "Playboi Carti Magnolia", title: "Magnolia", artist: "Playboi Carti" }
+        ];
+        var TAGS = {
+          tiktok: '<span class="inline-flex shrink-0 items-center gap-1 rounded-full bg-slate-900 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white dark:bg-white dark:text-black"><svg viewBox="0 0 24 24" class="h-3 w-3" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.3 1.9 4 4.4 4.2v3.2a8 8 0 0 1-4.3-1.4v6.3a6.3 6.3 0 1 1-6.3-6.3h.6v3.3a3 3 0 1 0 2.4 2.9V3h3.2z"/></svg>Viral</span>',
+          popular: '<span class="inline-flex shrink-0 items-center gap-1 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-800 dark:bg-amber-400/15 dark:text-amber-300"><svg viewBox="0 0 24 24" class="h-3 w-3" fill="currentColor" aria-hidden="true"><path d="M13.5 2s.9 3.1-1.3 5.6C10.4 9.7 8 11.4 8 15a4 4 0 0 0 8 0c0-1.3-.5-2.4-1.1-3.2 2.7 1 4.1 3.4 4.1 5.7A7 7 0 0 1 5 17.5C5 10.2 12.6 8.7 13.5 2z"/></svg>Popular</span>'
+        };
+        TRACKS.sort(function (a, b) { return (b.tag ? 1 : 0) - (a.tag ? 1 : 0); });
+        var ICON = {
+          play: '<svg data-i="play" viewBox="0 0 24 24" class="h-3.5 w-3.5 translate-x-[1px]" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/></svg>',
+          pause: '<svg data-i="pause" viewBox="0 0 24 24" class="hidden h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+          load: '<span data-i="load" class="u-spin hidden h-3.5 w-3.5 rounded-full border-2 border-current border-t-transparent"></span>'
+        };
+        var ol = $("#playlist");
+        $("[data-track-count]").textContent = TRACKS.length;
+        ol.innerHTML = TRACKS.map(function (t, i) {
+          return '<li data-track data-q="' + esc(t.q) + '" class="relative flex items-center gap-3 overflow-hidden rounded-2xl px-2 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.04]">' +
+            '<span class="flex w-5 shrink-0 justify-center text-sm font-semibold tabular-nums text-slate-400 dark:text-slate-500"><span data-num>' + (i + 1) + '</span><span data-eq class="u-eq hidden" aria-hidden="true"><i></i><i></i><i></i></span></span>' +
+            '<button type="button" data-play aria-label="Play a preview of ' + esc(t.title) + '" class="u-btn relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-crimson-700 to-slate-900 shadow-sm ring-1 ring-black/5 disabled:opacity-40 dark:ring-white/10">' +
+              '<span class="absolute inset-0 flex items-center justify-center text-white/70"><i data-icon="music" class="h-5 w-5"></i></span>' +
+              '<img data-art alt="" class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500" />' +
+              '<span class="absolute inset-0 flex items-center justify-center bg-black/20"><span class="flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow">' + ICON.play + ICON.pause + ICON.load + '</span></span>' +
+            '</button>' +
+            '<div class="min-w-0 flex-1"><div class="flex min-w-0 items-center gap-1.5"><p data-title class="truncate text-[15px] font-semibold">' + esc(t.title) + '</p>' + (t.tag ? TAGS[t.tag] : "") + '</div>' +
+            '<p class="truncate text-xs text-slate-500 dark:text-slate-400">' + esc(t.artist) + '</p></div>' +
+            '<a data-open href="#" target="_blank" rel="noopener noreferrer" class="hidden h-8 shrink-0 items-center justify-center gap-1 rounded-full bg-slate-100 px-2.5 text-[11px] font-semibold text-slate-700 hover:bg-slate-200 dark:bg-[#2c2c2e] dark:text-slate-200" aria-label="Open ' + esc(t.title) + ' in Apple Music" title="Open in Apple Music"><span class="hidden sm:inline">Apple Music</span><svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>' +
+            '<span data-progress class="pointer-events-none absolute bottom-0 left-2 h-0.5 w-0 rounded-full bg-crimson-600 dark:bg-crimson-300" aria-hidden="true"></span>' +
+            '</li>';
+        }).join("");
+        if (window.uniteIcons) window.uniteIcons(ol);
+
+        var audio = new Audio(), current = null, found = {};
         audio.preload = "none";
         function state(li, s) {
           var b = li.querySelector("[data-play]");
           ["play", "pause", "load"].forEach(function (k) { b.querySelector('[data-i="' + k + '"]').classList.toggle("hidden", k !== (s === "playing" ? "pause" : s === "loading" ? "load" : "play")); });
-          b.classList.toggle("!bg-crimson-700", s === "playing"); b.classList.toggle("!text-white", s === "playing");
-          if (s !== "playing") li.querySelector("[data-progress]").style.width = s === "paused" ? li.querySelector("[data-progress]").style.width : "0";
+          var on = s === "playing" || s === "paused" || s === "loading";
+          li.classList.toggle("bg-crimson-50", on); li.classList.toggle("dark:bg-white/[0.06]", on);
+          li.querySelector("[data-title]").classList.toggle("text-crimson-700", on); li.querySelector("[data-title]").classList.toggle("dark:text-crimson-200", on);
+          li.querySelector("[data-num]").classList.toggle("hidden", s === "playing"); li.querySelector("[data-eq]").classList.toggle("hidden", s !== "playing");
+          if (s === "idle") li.querySelector("[data-progress]").style.width = "0";
+          // The Apple Music link shows only on the track that is on now.
+          var a = li.querySelector("[data-open]"), f = found[li.getAttribute("data-q")];
+          a.classList.toggle("hidden", !(on && f && f.open)); a.classList.toggle("inline-flex", !!(on && f && f.open)); if (f && f.open) a.href = f.open;
         }
-        // The Apple Music link shows only on the track that is playing now.
-        function link(li, on) { var a = li.querySelector("[data-open]"), u = links[li.getAttribute("data-q")]; if (u) a.href = u; a.classList.toggle("hidden", !(on && u)); }
-        function stop() { if (current) { audio.pause(); state(current, "idle"); link(current, false); current = null; } }
-        function play(li, url) { current = li; link(li, true); audio.src = url; audio.play().then(function () { state(li, "playing"); }).catch(function () { state(li, "idle"); link(li, false); current = null; }); }
-        $$("[data-track]").forEach(function (li) {
-          var btn = li.querySelector("[data-play]"), q = li.getAttribute("data-q");
-          btn.addEventListener("click", function () {
+        function stop() { if (current) { audio.pause(); state(current, "idle"); current = null; } }
+        function play(li) { current = li; audio.src = found[li.getAttribute("data-q")].preview; audio.play().then(function () { state(li, "playing"); }).catch(function () { state(li, "idle"); current = null; }); }
+        function lookup(li) {
+          var q = li.getAttribute("data-q");
+          if (found[q] !== undefined) return Promise.resolve(found[q]);
+          return fetch("/api/preview?q=" + encodeURIComponent(q)).then(function (r) { return r.json(); }).then(function (j) {
+            found[q] = j && j.found ? j : null;
+            var img = li.querySelector("[data-art]");
+            if (found[q] && found[q].art) { img.onload = function () { img.classList.remove("opacity-0"); }; img.src = found[q].art.replace("100x100bb", "200x200bb"); }
+            if (!found[q]) { var b = li.querySelector("[data-play]"); b.disabled = true; b.title = "Preview not available"; }
+            return found[q];
+          }).catch(function () { return null; });
+        }
+        var rows = ol.querySelectorAll("[data-track]");
+        rows.forEach(function (li) {
+          li.querySelector("[data-play]").addEventListener("click", function () {
             if (current === li) { if (audio.paused) { audio.play(); state(li, "playing"); } else { audio.pause(); state(li, "paused"); } return; }
             stop();
-            if (found[q]) return play(li, found[q]);
             current = li; state(li, "loading");
-            fetch("/api/preview?q=" + encodeURIComponent(q)).then(function (r) { return r.json(); }).then(function (j) {
-              if (!j || !j.found) throw new Error("none");
-              found[q] = j.preview;
-              if (j.open) links[q] = j.open;
-              if (current === li) play(li, j.preview);
-            }).catch(function () {
-              if (current === li) { state(li, "idle"); current = null; }
-              btn.disabled = true; btn.title = "Preview not available";
-            });
+            lookup(li).then(function (f) { if (current !== li) return; if (f) play(li); else { state(li, "idle"); current = null; } });
           });
         });
-        audio.addEventListener("timeupdate", function () { if (current && audio.duration) current.querySelector("[data-progress]").style.width = (audio.currentTime / audio.duration * 100) + "%"; });
-        audio.addEventListener("ended", function () { if (current) { state(current, "idle"); link(current, false); current = null; } });
+        // Load the cover art once the page is up.
+        window.addEventListener("load", function () { rows.forEach(function (li) { lookup(li); }); });
+        audio.addEventListener("timeupdate", function () { if (current && audio.duration) current.querySelector("[data-progress]").style.width = "calc(" + (audio.currentTime / audio.duration * 100) + "% - 16px)"; });
+        audio.addEventListener("ended", function () { if (current) { state(current, "idle"); current = null; } });
       })();
 
       // Came back from Stripe without paying: free the held places straight away.
