@@ -1,6 +1,6 @@
 # unite.market
 
-Ticketing site for Unite events outside UOWD (AUD, Middlesex, Heriot-Watt and more). First event: **Project X: Interuniversity Student Rave**, 25 Oct 2026.
+Ticketing site for Unite events outside UOWD (AUD, Middlesex, Heriot-Watt and more). Current event: **Halloween on Deck**, the Upper Deck DXB yacht party, 31 Oct 2026.
 
 Static HTML + Tailwind CDN in the uniteuow.com style (navy/crimson palette, Unite header, event page with ticket picker and checkout sheet, light/dark theme), hosted on Vercel. Checkout is Stripe Checkout with our own stock and 15-minute holds (Vercel functions in `api/`, orders in Neon Postgres, ticket emails via Resend).
 

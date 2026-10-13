@@ -2,25 +2,25 @@
    charges these prices, so the browser can never change a price.
    Each ticket type uses up places from one or more pools: every ticket from "event" (people at the door),
    Early Bird tickets also from "early". Group of 4 takes 4 places. */
-export const EVENT = { id: "project-x", name: "Project X", when: "Sunday, 25 October 2026 · 8:00 PM – 2:00 AM", where: "Private villa, Dubai" };
+export const EVENT = { id: "halloween-on-deck", name: "Halloween on Deck", when: "Saturday, 31 October 2026 · Boarding 7:00 PM, sails 8:00 PM", where: "Upper Deck DXB yacht, Dubai" };
 
 export const POOLS = { event: 1000, early: 100 };
 
 export const GROUPS = [
   { name: "Early Bird", note: "First 100 tickets only", badge: "Limited", types: [
-    { id: "early-female", name: "Female", price: 40, uses: { event: 1, early: 1 } },
-    { id: "early-male", name: "Male", price: 80, uses: { event: 1, early: 1 } },
+    { id: "early-female", name: "Female", price: 80, uses: { event: 1, early: 1 } },
+    { id: "early-male", name: "Male", price: 120, uses: { event: 1, early: 1 } },
   ] },
   { name: "General Admission", note: "Standard entry", types: [
-    { id: "ga-female", name: "Female", price: 50, uses: { event: 1 } },
-    { id: "ga-male", name: "Male", price: 100, uses: { event: 1 } },
+    { id: "ga-female", name: "Female", price: 100, uses: { event: 1 } },
+    { id: "ga-male", name: "Male", price: 150, uses: { event: 1 } },
   ] },
   { name: "Group of 4", note: "Entry for 4 people, any mix", badge: "Best value", types: [
-    { id: "group-4", name: "4 people", price: 300, uses: { event: 4 } },
+    { id: "group-4", name: "4 people", price: 500, uses: { event: 4 } },
   ] },
-  { name: "VIP", note: "VIP area and fast-track entry", types: [
-    { id: "vip-female", name: "Female", price: 150, uses: { event: 1 } },
-    { id: "vip-male", name: "Male", price: 200, uses: { event: 1 } },
+  { name: "VIP", note: "VIP area and fast-track boarding", types: [
+    { id: "vip-female", name: "Female", price: 200, uses: { event: 1 } },
+    { id: "vip-male", name: "Male", price: 300, uses: { event: 1 } },
   ] },
 ];
 

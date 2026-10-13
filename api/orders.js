@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     ...rows.map((t) => { const o = orders[t.order_id]; return [t.id, t.label, t.name, t.email, o.phone, t.price, t.status,
       t.checked_in_at ? new Date(t.checked_in_at).toISOString() : "", o.id, new Date(o.paid_at).toISOString()].map(cell).join(","); })].join("\n");
   res.setHeader("Content-Type", "text/csv; charset=utf-8");
-  res.setHeader("Content-Disposition", 'attachment; filename="project-x-guests.csv"');
+  res.setHeader("Content-Disposition", 'attachment; filename="halloween-on-deck-guests.csv"');
   res.setHeader("Cache-Control", "no-store");
   return res.status(200).send(csv);
 }

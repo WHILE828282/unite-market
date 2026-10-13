@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   }
 
   const id = b.code ? parseTicketCode(b.code) : isTicketId(b.id) ? String(b.id) : null;
-  if (!id) return res.status(200).json({ ok: true, result: "invalid", reason: "Not a Project X ticket." });
+  if (!id) return res.status(200).json({ ok: true, result: "invalid", reason: "Not a Halloween on Deck ticket." });
   const t = await getTicket(id);
   if (!t) return res.status(200).json({ ok: true, result: "invalid", reason: "Ticket not found." });
   if (t.status !== "valid") return res.status(200).json({ ok: true, result: "invalid", reason: "This ticket was refunded.", attendee: view(t) });
