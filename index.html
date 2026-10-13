@@ -185,18 +185,18 @@
         </section>
 
         <!-- UOW students: exclusive promo on uniteuow.com (their price + VIP table giveaway) -->
-        <a href="https://www.uniteuow.com" class="u-card relative block overflow-hidden rounded-3xl p-5 text-white shadow-[0_24px_50px_-24px_rgba(212,160,23,.6)] ring-1 ring-amber-300/25"
-          style="background: radial-gradient(80% 90% at 100% 0%, rgba(212,160,23,.32), transparent 60%), linear-gradient(160deg, #1a1408 0%, #0b0a07 100%)">
-          <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-amber-300">UOW students only</p>
+        <a href="https://www.uniteuow.com" class="u-card relative block overflow-hidden rounded-3xl p-5 text-white shadow-[0_20px_44px_-26px_rgba(201,162,78,.45)] ring-1 ring-amber-200/15"
+          style="background: radial-gradient(70% 80% at 100% 0%, rgba(201,162,78,.16), transparent 60%), linear-gradient(160deg, #17140f 0%, #0c0b0a 100%)">
+          <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-amber-200/80">UOW students only</p>
           <p class="mt-1 text-xl font-extrabold leading-tight tracking-tight">Exclusive promo on Unite</p>
-          <ul class="mt-3 space-y-2 text-sm text-amber-50/80">
-            <li class="flex items-center gap-2"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-white/10 text-amber-300"><i data-icon="ticket" class="h-3.5 w-3.5"></i></span> Your ticket and QR in the Unite app</li>
-            <li class="flex items-center gap-2"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-white/10 text-amber-300"><i data-icon="star" class="h-3.5 w-3.5"></i></span> Win a VIP table for you and 4 friends</li>
+          <ul class="mt-3 space-y-2 text-sm text-white/65">
+            <li class="flex items-center gap-2"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-amber-200/10 text-amber-200"><i data-icon="ticket" class="h-3.5 w-3.5"></i></span> Your ticket and QR in the Unite app</li>
+            <li class="flex items-center gap-2"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-amber-200/10 text-amber-200"><i data-icon="star" class="h-3.5 w-3.5"></i></span> Win a VIP table for you and 4 friends</li>
           </ul>
-          <span class="mt-4 flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-sm font-bold text-amber-950" style="background: linear-gradient(135deg, #fde68a 0%, #d4a017 55%, #a16207 100%)">
+          <span class="mt-4 flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-sm font-bold text-[#2a1f08]" style="background: linear-gradient(135deg, #e9cf8a 0%, #c9a24e 100%)">
             <span>Sign up with your uni email</span><span aria-hidden="true">→</span>
           </span>
-          <span class="mt-2 block text-center text-xs text-amber-50/50">uniteuow.com</span>
+          <span class="mt-2 block text-center text-xs text-white/40">uniteuow.com</span>
         </a>
       </div>
     </div>
@@ -297,7 +297,7 @@
 
       // Ticket colour dots, as on uniteuow.com: pink Female, blue Male, gold VIP.
       function dot(id) {
-        var st = /^vip/.test(id) ? "background:linear-gradient(135deg,#fde68a 0%,#d4a017 55%,#a16207 100%);box-shadow:0 0 6px rgba(212,160,23,.7)"
+        var st = /^vip/.test(id) ? "background:linear-gradient(135deg,#e9cf8a 0%,#c9a24e 100%)"
           : /-female$/.test(id) ? "background:#db2777" : /-male$/.test(id) ? "background:#2563eb" : "";
         return st ? '<span class="h-2.5 w-2.5 shrink-0 rounded-full" style="' + st + '" aria-hidden="true"></span>' : "";
       }
