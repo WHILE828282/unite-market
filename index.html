@@ -388,7 +388,7 @@
 
       // Playlist: 30-second previews from Apple Music (/api/preview), one at a time.
       (function () {
-        var audio = new Audio(), current = null, found = {};
+        var audio = new Audio(), current = null, found = {}, links = {};
         audio.preload = "none";
         function state(li, s) {
           var b = li.querySelector("[data-play]");
@@ -396,8 +396,10 @@
           b.classList.toggle("!bg-crimson-700", s === "playing"); b.classList.toggle("!text-white", s === "playing");
           if (s !== "playing") li.querySelector("[data-progress]").style.width = s === "paused" ? li.querySelector("[data-progress]").style.width : "0";
         }
-        function stop() { if (current) { audio.pause(); state(current, "idle"); current = null; } }
-        function play(li, url) { current = li; audio.src = url; audio.play().then(function () { state(li, "playing"); }).catch(function () { state(li, "idle"); current = null; }); }
+        // The Apple Music link shows only on the track that is playing now.
+        function link(li, on) { var a = li.querySelector("[data-open]"), u = links[li.getAttribute("data-q")]; if (u) a.href = u; a.classList.toggle("hidden", !(on && u)); }
+        function stop() { if (current) { audio.pause(); state(current, "idle"); link(current, false); current = null; } }
+        function play(li, url) { current = li; link(li, true); audio.src = url; audio.play().then(function () { state(li, "playing"); }).catch(function () { state(li, "idle"); link(li, false); current = null; }); }
         $$("[data-track]").forEach(function (li) {
           var btn = li.querySelector("[data-play]"), q = li.getAttribute("data-q");
           btn.addEventListener("click", function () {
@@ -408,7 +410,7 @@
             fetch("/api/preview?q=" + encodeURIComponent(q)).then(function (r) { return r.json(); }).then(function (j) {
               if (!j || !j.found) throw new Error("none");
               found[q] = j.preview;
-              if (j.open) { var a = li.querySelector("[data-open]"); a.href = j.open; a.classList.remove("hidden"); }
+              if (j.open) links[q] = j.open;
               if (current === li) play(li, j.preview);
             }).catch(function () {
               if (current === li) { state(li, "idle"); current = null; }
@@ -417,7 +419,7 @@
           });
         });
         audio.addEventListener("timeupdate", function () { if (current && audio.duration) current.querySelector("[data-progress]").style.width = (audio.currentTime / audio.duration * 100) + "%"; });
-        audio.addEventListener("ended", function () { if (current) { state(current, "idle"); current = null; } });
+        audio.addEventListener("ended", function () { if (current) { state(current, "idle"); link(current, false); current = null; } });
       })();
 
       // Came back from Stripe without paying: free the held places straight away.
