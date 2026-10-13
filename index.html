@@ -58,7 +58,7 @@
           <div class="min-w-0 flex-1">
             <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Yacht party · Dubai · <span data-from>From 100 AED</span></p>
             <h1 class="mt-1 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">Halloween on Deck</h1>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Hosted by Upper Deck DXB · Tickets by Unite</p>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Hosted by Upper Deck DXB · Presented by Unite</p>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
         </div>
 
         <!-- Availability -->
-        <div class="rounded-2xl border border-slate-200/80 bg-white p-4 dark:border-white/[0.07] dark:bg-[#1c1c1e]">
+        <div class="hidden rounded-2xl border border-slate-200/80 bg-white p-4 dark:border-white/[0.07] dark:bg-[#1c1c1e]">
           <div class="mb-2 flex items-center justify-between text-sm">
             <span class="font-semibold">Availability</span>
             <span class="text-slate-500 dark:text-slate-400" data-booked></span>
@@ -145,7 +145,7 @@
             <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200/70 dark:bg-[#2c2c2e] dark:text-slate-300 dark:ring-white/10"><i data-icon="person" class="h-4 w-4"></i></span>
             <div class="min-w-0 flex-1">
               <p class="font-semibold">Upper Deck DXB <span class="font-normal text-slate-500 dark:text-slate-400">· Organizer</span></p>
-              <p class="text-slate-500 dark:text-slate-400">Tickets and support by Unite</p>
+              <p class="text-slate-500 dark:text-slate-400">Tickets sold by the organiser · presented by Unite</p>
               <div class="mt-2 flex flex-wrap gap-2">
                 <a href="https://www.instagram.com/p/DeKC4wuMdRA/" target="_blank" rel="noopener noreferrer"
                   class="u-btn inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af] px-3 py-2 text-xs font-semibold text-white shadow-sm hover:opacity-90">
@@ -172,15 +172,12 @@
         <section id="tickets" class="scroll-mt-24 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200/80 dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
           <div class="flex items-center justify-between px-5 pt-5">
             <h2 class="text-lg font-bold tracking-tight">Tickets</h2>
-            <span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400"><i data-icon="lock" class="h-3.5 w-3.5"></i> Apple Pay · Google Pay · Card</span>
+            <span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400"><i data-icon="lock" class="h-3.5 w-3.5"></i> Sold by Upper Deck DXB</span>
           </div>
           <div id="tier-list" class="mt-2"></div>
-          <div class="hidden items-center gap-4 border-t border-slate-200/70 px-5 py-4 dark:border-white/[0.07] lg:flex">
-            <div class="min-w-0 flex-1">
-              <p class="text-lg font-bold leading-tight tabular-nums"><span data-total>0</span> AED</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400" data-count>No tickets</p>
-            </div>
-            <button type="button" data-checkout disabled class="u-btn rounded-xl bg-crimson-700 px-6 py-3 text-base font-semibold text-white hover:bg-crimson-600 disabled:bg-slate-200 disabled:text-slate-400 dark:bg-white dark:text-black dark:hover:bg-slate-200 dark:disabled:bg-[#2c2c2e] dark:disabled:text-slate-500">Checkout</button>
+          <div class="border-t border-slate-200/70 px-5 py-4 dark:border-white/[0.07]">
+            <a data-buy href="#tickets" target="_blank" rel="noopener" aria-disabled="true" class="u-btn flex items-center justify-center gap-1.5 rounded-xl bg-crimson-700 px-6 py-3 text-base font-semibold text-white hover:bg-crimson-600 aria-disabled:pointer-events-none aria-disabled:bg-slate-200 aria-disabled:text-slate-500 dark:bg-white dark:text-black dark:hover:bg-slate-200 dark:aria-disabled:bg-[#2c2c2e] dark:aria-disabled:text-slate-400 w-full">Tickets open soon</a>
+            <p class="mt-2.5 text-center text-xs text-slate-500 dark:text-slate-400">You pay on the organiser's secure page (Ticket Tailor). Prices plus a 10% booking fee; tickets come from Upper Deck DXB by email.</p>
           </div>
         </section>
 
@@ -209,7 +206,7 @@
         <p class="text-lg font-bold leading-tight tabular-nums" data-bar-price>From 100 AED</p>
         <p class="text-xs text-slate-500 dark:text-slate-400" data-bar-sub>&nbsp;</p>
       </div>
-      <button type="button" data-checkout data-mobile class="u-btn rounded-xl bg-crimson-700 px-6 py-3 text-base font-semibold text-white hover:bg-crimson-600 dark:bg-white dark:text-black">Get tickets</button>
+      <a data-buy href="#tickets" target="_blank" rel="noopener" aria-disabled="true" class="u-btn flex items-center justify-center gap-1.5 rounded-xl bg-crimson-700 px-6 py-3 text-base font-semibold text-white hover:bg-crimson-600 aria-disabled:pointer-events-none aria-disabled:bg-slate-200 aria-disabled:text-slate-500 dark:bg-white dark:text-black dark:hover:bg-slate-200 dark:aria-disabled:bg-[#2c2c2e] dark:aria-disabled:text-slate-400 shrink-0">Soon</a>
     </div>
   </div>
 
@@ -301,6 +298,14 @@
           : /-female$/.test(id) ? "background:#db2777" : /-male$/.test(id) ? "background:#2563eb" : "";
         return st ? '<span class="h-2.5 w-2.5 shrink-0 rounded-full" style="' + st + '" aria-hidden="true"></span>' : "";
       }
+      // Tickets are bought on the organiser's page through our referral link (TICKETS_URL in Vercel, via /api/stock).
+      function setBuy(url) {
+        var ok = /^https:\/\//.test(url || "");
+        $$("[data-buy]").forEach(function (a) {
+          if (ok) { a.href = url; a.removeAttribute("aria-disabled"); a.textContent = a.closest("#tickets") ? "Get tickets ↗" : "Get tickets"; }
+          else { a.href = "#tickets"; a.setAttribute("aria-disabled", "true"); a.textContent = a.closest("#tickets") ? "Tickets open soon" : "Soon"; }
+        });
+      }
       function build() {
         // Phases: earlier ones show as sold out, later ones as coming next, both as one quiet line; the current one gets the steppers.
         list.innerHTML = GROUPS.map(function (g) {
@@ -310,20 +315,16 @@
               '<p class="text-sm font-medium ' + (g.stage === "past" ? "text-slate-400 line-through decoration-slate-300 dark:text-slate-500 dark:decoration-slate-600" : "text-slate-500 dark:text-slate-400") + '">' + esc(g.name) + "</p>" +
               '<span class="flex shrink-0 items-center gap-2 text-sm"><span class="tabular-nums text-slate-400 dark:text-slate-500">' + from + " AED</span>" + chip(GREY, g.stage === "past" ? "Sold out" : "Next") + "</span></div>";
           }
-          var out = live && !left, single = g.types.length === 1;
+          var out = false, single = g.types.length === 1;
           return '<div class="border-t border-slate-200/70 px-5 py-4 first:border-0 dark:border-white/[0.07]' + (out ? " opacity-50" : "") + '">' +
             '<div class="flex items-center gap-1.5"><p class="font-semibold">' + esc(g.name) + "</p>" + (out ? chip(GREY, "Sold out") : chip(RED, esc(g.badge || "On sale now"))) + "</div>" +
             (g.note ? '<p class="text-xs text-slate-500 dark:text-slate-400">' + esc(g.note) + "</p>" : "") +
             g.types.map(function (t) {
-              return '<div class="mt-3 flex items-center gap-3" data-tier="' + esc(t.id) + '">' +
-                '<div class="min-w-0 flex-1"><p class="flex items-center gap-1.5 text-sm">' + dot(t.id) + (single ? "" : '<span class="text-slate-600 dark:text-slate-300">' + esc(t.name) + "</span> ") + '<span class="font-semibold tabular-nums">' + t.price + ' AED</span></p><p class="text-xs text-slate-400 dark:text-slate-500">+ ' + money(feeOf(t.price)) + " AED booking fee</p>" +
-                '<p data-left class="text-xs font-semibold text-crimson-700 dark:text-crimson-200"></p></div>' +
-                '<button type="button" data-step="-1" aria-label="Fewer ' + esc(g.name + " " + t.name) + ' tickets" class="' + stepCls + '">−</button>' +
-                '<span data-qty class="w-6 text-center text-sm font-semibold tabular-nums" aria-live="polite">0</span>' +
-                '<button type="button" data-step="1" aria-label="More ' + esc(g.name + " " + t.name) + ' tickets" class="' + stepCls + '">+</button>' +
+              return '<div class="mt-3 flex items-center gap-3">' +
+                '<div class="min-w-0 flex-1"><p class="flex items-center gap-1.5 text-sm">' + dot(t.id) + (single ? "" : '<span class="text-slate-600 dark:text-slate-300">' + esc(t.name) + "</span> ") + '<span class="font-semibold tabular-nums">' + t.price + ' AED</span></p><p class="text-xs text-slate-400 dark:text-slate-500">+ ' + money(feeOf(t.price)) + " AED booking fee</p></div>" +
                 "</div>";
             }).join("") + "</div>";
-        }).join("") + (live ? "" : '<p class="border-t border-slate-200/70 px-5 py-4 text-center text-sm text-slate-500 dark:border-white/[0.07] dark:text-slate-400">Ticket sales open soon.</p>');
+        }).join("");
         list.querySelectorAll("[data-tier]").forEach(function (row) {
           var k = row.getAttribute("data-tier");
           row.querySelectorAll("[data-step]").forEach(function (b) {
@@ -352,7 +353,7 @@
       function loadStock() {
         return fetch("/api/stock", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) {
           if (!j || !j.groups) throw new Error("no stock");
-          live = !!j.live; MAX = j.maxPerOrder || MAX; GROUPS = j.groups; if (j.feeRate != null) FEE = j.feeRate;
+          live = !!j.live; MAX = j.maxPerOrder || MAX; GROUPS = j.groups; if (j.feeRate != null) FEE = j.feeRate; setBuy(j.ticketsUrl);
           var min = Infinity;
           GROUPS.forEach(function (g) { g.types.forEach(function (t) {
             TIERS[t.id] = { group: g.name, name: t.name, price: t.price, left: t.left, single: g.types.length === 1 };
@@ -367,7 +368,7 @@
           $("[data-bar]").className = "h-full rounded-full " + (p.left <= 0 ? "bg-slate-400" : p.left <= 50 ? "bg-crimson-600" : "bg-slate-700 dark:bg-slate-300");
           $("[data-places]").textContent = !live ? "Ticket sales open soon" : p.left <= 0 ? "Sold out" : p.left <= 50 ? "Only " + p.left + " places left" : p.left + " of " + p.total + " places remaining";
           $("[data-places]").className = "mt-1.5 text-sm " + (live && p.left > 0 && p.left <= 50 ? "font-semibold text-crimson-700 dark:text-crimson-200" : "text-slate-500 dark:text-slate-400");
-          placesShort = !live ? "Sales open soon" : p.left <= 0 ? "Sold out" : p.left + " left";
+          placesShort = "+ 10% booking fee";
           build();
         }).catch(function () {
           if (!GROUPS.length) list.innerHTML = '<p class="px-5 py-4 text-center text-sm text-slate-500 dark:text-slate-400">Tickets couldn\'t load. Refresh the page to try again.</p>';

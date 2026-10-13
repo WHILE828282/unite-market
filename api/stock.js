@@ -23,9 +23,11 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: false, live: false, error: "Tickets are unavailable right now. Please try again in a minute." });
     }
   }
+  // Referral link to the organiser's checkout (Ticket Tailor): every "Get tickets" button opens it.
+  const ticketsUrl = /^https:\/\/\S+$/.test(String(process.env.TICKETS_URL || "").trim()) ? String(process.env.TICKETS_URL).trim() : "";
   const groups = GROUPS.map((g) => ({ name: g.name, note: g.note || "", badge: g.badge || "", stage: stage(g),
     types: g.types.map((t) => ({ id: t.id, name: t.name, price: t.price, left: left ? left[t.id] : 0 })) }));
   // Places at the door: for the availability bar.
   const places = { total: POOLS.event, left: pools ? Math.max(0, pools.event) : POOLS.event };
-  return res.status(200).json({ ok: true, live, groups, places, maxPerOrder: MAX_PER_ORDER, holdMinutes: HOLD_MINUTES, feeRate: FEE_RATE });
+  return res.status(200).json({ ok: true, live, groups, places, maxPerOrder: MAX_PER_ORDER, holdMinutes: HOLD_MINUTES, feeRate: FEE_RATE, ticketsUrl });
 }
