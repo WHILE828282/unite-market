@@ -56,7 +56,7 @@
             <span class="mt-0.5 text-[10px] font-medium uppercase text-slate-500 dark:text-slate-400">Sat</span>
           </div>
           <div class="min-w-0 flex-1">
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Yacht party · Dubai · <span data-from>From 80 AED</span></p>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Yacht party · Dubai · <span data-from>From 100 AED</span></p>
             <h1 class="mt-1 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">Halloween on Deck</h1>
             <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Hosted by Upper Deck DXB · Tickets by Unite</p>
           </div>
@@ -66,7 +66,7 @@
         <div class="grid grid-cols-3 gap-2">
           <div class="rounded-2xl bg-slate-100 px-3 py-2.5 dark:bg-[#1c1c1e]"><p class="text-[11px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Date</p><p class="mt-0.5 text-[14px] font-semibold leading-snug">Sat, 31 Oct</p></div>
           <div class="rounded-2xl bg-slate-100 px-3 py-2.5 dark:bg-[#1c1c1e]"><p class="text-[11px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Time</p><p class="mt-0.5 text-[14px] font-semibold leading-snug">Boards 7 PM</p></div>
-          <div class="rounded-2xl bg-slate-100 px-3 py-2.5 dark:bg-[#1c1c1e]"><p class="text-[11px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Price</p><p class="mt-0.5 text-[14px] font-semibold leading-snug" data-from-short>From 80 AED</p></div>
+          <div class="rounded-2xl bg-slate-100 px-3 py-2.5 dark:bg-[#1c1c1e]"><p class="text-[11px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">Price</p><p class="mt-0.5 text-[14px] font-semibold leading-snug" data-from-short>From 100 AED</p></div>
         </div>
 
         <!-- Countdown to boarding -->
@@ -203,7 +203,7 @@
   <div class="u-header fixed inset-x-0 bottom-0 z-30 border-t border-[rgba(110,90,70,0.14)] dark:border-white/10 lg:hidden" style="padding-bottom: env(safe-area-inset-bottom, 0px)">
     <div class="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3">
       <div class="min-w-0 flex-1">
-        <p class="text-lg font-bold leading-tight tabular-nums" data-bar-price>From 80 AED</p>
+        <p class="text-lg font-bold leading-tight tabular-nums" data-bar-price>From 100 AED</p>
         <p class="text-xs text-slate-500 dark:text-slate-400" data-bar-sub>&nbsp;</p>
       </div>
       <button type="button" data-checkout data-mobile class="u-btn rounded-xl bg-crimson-700 px-6 py-3 text-base font-semibold text-white hover:bg-crimson-600 dark:bg-white dark:text-black">Get tickets</button>
@@ -283,21 +283,31 @@
       var list = $("#tier-list");
       var sum = function (f) { return Object.keys(cart).reduce(function (n, k) { return n + f(k); }, 0); };
       var count = function () { return sum(function (k) { return cart[k]; }); };
-      var total = function () { return sum(function (k) { return cart[k] * TIERS[k].price; }); };
+      var FEE = 0.1, money = function (n) { n = Math.round(n * 100) / 100; return n % 1 ? n.toFixed(2) : String(n); };
+      var subtotal = function () { return sum(function (k) { return cart[k] * TIERS[k].price; }); };
+      var feeOf = function (n) { return Math.round(n * FEE * 100) / 100; };
+      var total = function () { return Math.round((subtotal() + feeOf(subtotal())) * 100) / 100; }; // with the booking fee
       var stepCls = "u-btn flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-base font-semibold text-slate-700 disabled:opacity-35 dark:bg-[#2c2c2e] dark:text-slate-200";
       var chip = function (cls, t) { return '<span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold ring-1 ' + cls + '">' + t + "</span>"; };
       var GREY = "bg-slate-100 text-slate-500 ring-slate-200 dark:bg-[#2c2c2e] dark:text-slate-400 dark:ring-white/10";
       var RED = "bg-crimson-50 text-crimson-700 ring-crimson-100 dark:bg-crimson-400/15 dark:text-crimson-200 dark:ring-crimson-400/30";
 
       function build() {
+        // Phases: earlier ones show as sold out, later ones as coming next, both as one quiet line; the current one gets the steppers.
         list.innerHTML = GROUPS.map(function (g) {
-          var left = g.types.reduce(function (n, t) { return n + t.left; }, 0), out = live && !left;
+          var left = g.types.reduce(function (n, t) { return n + t.left; }, 0), from = Math.min.apply(null, g.types.map(function (t) { return t.price; }));
+          if (g.stage !== "current") {
+            return '<div class="flex items-center justify-between gap-3 border-t border-slate-200/70 px-5 py-3 first:border-0 dark:border-white/[0.07]">' +
+              '<p class="text-sm font-medium ' + (g.stage === "past" ? "text-slate-400 line-through decoration-slate-300 dark:text-slate-500 dark:decoration-slate-600" : "text-slate-500 dark:text-slate-400") + '">' + esc(g.name) + "</p>" +
+              '<span class="flex shrink-0 items-center gap-2 text-sm"><span class="tabular-nums text-slate-400 dark:text-slate-500">' + from + " AED</span>" + chip(GREY, g.stage === "past" ? "Sold out" : "Next") + "</span></div>";
+          }
+          var out = live && !left, single = g.types.length === 1;
           return '<div class="border-t border-slate-200/70 px-5 py-4 first:border-0 dark:border-white/[0.07]' + (out ? " opacity-50" : "") + '">' +
-            '<div class="flex items-center gap-1.5"><p class="font-semibold">' + esc(g.name) + "</p>" + (out ? chip(GREY, "Sold out") : g.badge ? chip(RED, esc(g.badge)) : "") + "</div>" +
-            '<p class="text-xs text-slate-500 dark:text-slate-400">' + esc(g.note) + "</p>" +
+            '<div class="flex items-center gap-1.5"><p class="font-semibold">' + esc(g.name) + "</p>" + (out ? chip(GREY, "Sold out") : chip(RED, esc(g.badge || "On sale now"))) + "</div>" +
+            (g.note ? '<p class="text-xs text-slate-500 dark:text-slate-400">' + esc(g.note) + "</p>" : "") +
             g.types.map(function (t) {
               return '<div class="mt-3 flex items-center gap-3" data-tier="' + esc(t.id) + '">' +
-                '<div class="min-w-0 flex-1"><p class="text-sm"><span class="text-slate-600 dark:text-slate-300">' + esc(t.name) + '</span> <span class="font-semibold tabular-nums">' + t.price + " AED</span></p>" +
+                '<div class="min-w-0 flex-1"><p class="text-sm">' + (single ? "" : '<span class="text-slate-600 dark:text-slate-300">' + esc(t.name) + "</span> ") + '<span class="font-semibold tabular-nums">' + t.price + ' AED</span> <span class="text-xs text-slate-400 dark:text-slate-500">+ ' + money(feeOf(t.price)) + " fee</span></p>" +
                 '<p data-left class="text-xs font-semibold text-crimson-700 dark:text-crimson-200"></p></div>' +
                 '<button type="button" data-step="-1" aria-label="Fewer ' + esc(g.name + " " + t.name) + ' tickets" class="' + stepCls + '">−</button>' +
                 '<span data-qty class="w-6 text-center text-sm font-semibold tabular-nums" aria-live="polite">0</span>' +
@@ -322,23 +332,23 @@
           row.querySelector("[data-left]").textContent = live && t.left > 0 && t.left <= 20 ? "Only " + t.left + " left" : "";
         });
         var n = count();
-        $$("[data-total]").forEach(function (el) { el.textContent = total(); });
+        $$("[data-total]").forEach(function (el) { el.textContent = money(total()); });
         $$("[data-count]").forEach(function (el) { el.textContent = n ? n + (n === 1 ? " ticket" : " tickets") : "No tickets"; });
         $$("[data-checkout]:not([data-mobile])").forEach(function (b) { b.disabled = !n; });
-        $("[data-bar-price]").textContent = n ? total() + " AED" : fromText;
+        $("[data-bar-price]").textContent = n ? money(total()) + " AED" : fromText;
         $("[data-bar-sub]").textContent = n ? n + (n === 1 ? " ticket" : " tickets") : placesShort;
         $("[data-mobile]").textContent = n ? "Checkout" : "Get tickets";
       }
-      var fromText = "From 80 AED", placesShort = " ";
+      var fromText = "From 100 AED", placesShort = " ";
       function loadStock() {
         return fetch("/api/stock", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) {
           if (!j || !j.groups) throw new Error("no stock");
-          live = !!j.live; MAX = j.maxPerOrder || MAX; GROUPS = j.groups;
+          live = !!j.live; MAX = j.maxPerOrder || MAX; GROUPS = j.groups; if (j.feeRate != null) FEE = j.feeRate;
           var min = Infinity;
           GROUPS.forEach(function (g) { g.types.forEach(function (t) {
             TIERS[t.id] = { group: g.name, name: t.name, price: t.price, left: t.left, single: g.types.length === 1 };
             cart[t.id] = Math.min(cart[t.id] || 0, t.left); // someone else bought the last ones
-            if (!live || t.left > 0) min = Math.min(min, t.price);
+            if (g.stage === "current" && (!live || t.left > 0)) min = Math.min(min, t.price);
           }); });
           fromText = min < Infinity ? "From " + min + " AED" : "Sold out";
           $$("[data-from], [data-from-short]").forEach(function (el) { el.textContent = fromText; });
@@ -458,6 +468,7 @@
         if (!count()) return $("#tickets").scrollIntoView({ behavior: "smooth" });
         var html = '<div class="mb-2 font-semibold">Halloween on Deck · Sat 31 Oct, 7:00 PM</div>';
         Object.keys(TIERS).forEach(function (k) { if (cart[k]) html += row(esc(TIERS[k].group + (TIERS[k].single ? "" : " · " + TIERS[k].name)) + " × " + cart[k], (cart[k] * TIERS[k].price).toFixed(2) + " AED"); });
+        html += row("Booking fee (10%)", feeOf(subtotal()).toFixed(2) + " AED");
         html += row("Total", total().toFixed(2) + " AED", true);
         $("#summary").innerHTML = html;
         agree.checked = false; pay.disabled = true; payLabel.textContent = "Continue to payment"; setNote(NOTE);

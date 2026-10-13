@@ -1,4 +1,4 @@
-/* POST { items: { "ga-male": 2, ... } } -> holds the tickets for 15 minutes and returns the Stripe Checkout URL.
+/* POST { items: { "p1-male": 2, ... } } -> holds the tickets for 15 minutes and returns the Stripe Checkout URL.
    POST { a: "cancel", order }            -> buyer came back without paying: frees the places at once. */
 import { EVENT, HOLD_MINUTES, TYPES, readCart, lineName } from "./_tickets.js";
 import { dbConfigured, ensureSchema, holdOrder, setSession, setStatus, getOrder, sweepHolds } from "./_db.js";
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     await Promise.allSettled((await sweepHolds()).map(expireSession));
 
     const id = newId();
-    const held = await holdOrder(id, c.cart, c.uses, c.amount);
+    const held = await holdOrder(id, c.cart, c.uses, c.total);
     if (!held) return fail("Sorry, not enough tickets left for this order. Check what's still available and try again.", 409);
 
     const site = origin(req);
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         line_items: Object.entries(c.cart).map(([tid, qty]) => ({
           quantity: qty,
           price_data: { currency: "aed", unit_amount: TYPES[tid].price * 100, product_data: { name: `${EVENT.name} · ${lineName(tid)}` } },
-        })),
+        })).concat(c.fee > 0 ? [{ quantity: 1, price_data: { currency: "aed", unit_amount: Math.round(c.fee * 100), product_data: { name: "Booking fee (10%)" } } }] : []),
         phone_number_collection: { enabled: "true" },
         // Stripe's minimum is 30 minutes; our own 15-minute hold closes the page earlier (see sweepHolds).
         expires_at: Math.floor(Date.now() / 1000) + 31 * 60,

@@ -28,7 +28,7 @@ export const toneOf = (label) => (/Female$/.test(String(label || "")) ? "female"
 
 export const people = (items) => Object.entries(items).reduce((n, [id, q]) => n + q * (TYPES[id] ? TYPES[id].uses.event : 1), 0);
 
-// One ticket per person. Group of 4 -> 4 tickets at a quarter of the price each.
+// One ticket per person. VIP Table -> 5 tickets at a fifth of the price each.
 export function makeTickets(items) {
   const out = [];
   for (const [id, qty] of Object.entries(items)) {

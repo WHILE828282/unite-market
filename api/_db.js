@@ -31,6 +31,8 @@ export function ensureSchema() {
       paid_at timestamptz
     )`
     .then(() => sql()`create index if not exists market_orders_status on market_orders (status, expires_at)`)
+    // Totals with the booking fee can have fils (137.50).
+    .then(() => sql()`do $$ begin if (select data_type from information_schema.columns where table_name = 'market_orders' and column_name = 'amount') = 'integer' then alter table market_orders alter column amount type numeric; end if; end $$`)
     .then(() => sql()`
       create table if not exists market_tickets (
         id text primary key,
