@@ -76,7 +76,7 @@ export async function sendTicket(order, tickets, origin) {
   <p style="margin:0;color:#475569">${esc(EVENT.when)}<br>${esc(EVENT.where)}</p>
   ${cards}
   <p style="color:#475569;font-size:14px">Each person shows their own QR code at the door. The exact location is sent before the event. <a href="${link}" style="color:#741629">Open your tickets</a></p>
-  <p style="color:#94a3b8;font-size:12px">Order ${esc(order.id)} · ${order.amount} AED · Unite, Dubai · support@uniteuow.com · Telegram @UniteSupport_bot</p>
+  <p style="color:#94a3b8;font-size:12px">Order ${esc(order.id)} · ${order.amount} AED · Unite, Dubai · support@uniteuow.com · <a href="https://t.me/UniteSupport_bot" style="color:#94a3b8">Telegram</a></p>
 </div>`;
   const text = `You're in: ${EVENT.name}\n${EVENT.when}\n${EVENT.where}\n\n${tickets.map((t) => `${t.label} · ${t.id}`).join("\n")}\n\nOpen your tickets (QR codes): ${link}\n\nOrder ${order.id} · ${order.amount} AED\nUnite · support@uniteuow.com`;
   const r = await fetch("https://api.resend.com/emails", {
