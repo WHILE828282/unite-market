@@ -43,7 +43,7 @@
   "rewrites": [
     {
       "source": "/googlefdb8731b0b5518bf.html",
-      "destination": "/google-site-verification.txt"
+      "destination": "/api/google-verify"
     }
   ]
 }
