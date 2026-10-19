@@ -42,7 +42,7 @@
   ],
   "rewrites": [
     {
-      "source": "/googlefdb8731b0b5518bf.html",
+      "source": "/googlefdb8731b0b5518bf(.html)?",
       "destination": "/api/google-verify"
     }
   ]
