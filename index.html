@@ -14,6 +14,51 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="canonical" href="https://unite.market/" />
+  <!-- Structured data for search engines and AI assistants: the event and its FAQ (keep in sync with the page). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Event",
+        "name": "Halloween on Deck",
+        "description": "Halloween yacht party for university students in Dubai by Upper Deck DXB: three live DJs on three floors, costumes, face paint and Dubai skyline views after dark. Boarding 7:00 PM, sails 8:00 PM.",
+        "startDate": "2026-10-31T19:00:00+04:00",
+        "endDate": "2026-10-31T23:00:00+04:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "image": ["https://unite.market/upper-deck-2.jpg"],
+        "location": {
+          "@type": "Place",
+          "name": "Dubai Harbour Cruise Terminal (Gate 3)",
+          "address": { "@type": "PostalAddress", "streetAddress": "Dubai Harbour, Gate 3", "addressLocality": "Dubai", "addressCountry": "AE" }
+        },
+        "organizer": { "@type": "Organization", "name": "Upper Deck DXB", "url": "https://www.instagram.com/p/DeKC4wuMdRA/" },
+        "offers": {
+          "@type": "AggregateOffer",
+          "url": "https://unite.market/#tickets",
+          "priceCurrency": "AED",
+          "lowPrice": "100",
+          "highPrice": "700",
+          "availability": "https://schema.org/InStock",
+          "validThrough": "2026-10-31T19:00:00+04:00"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "When and where is Halloween on Deck?", "acceptedAnswer": { "@type": "Answer", "text": "Saturday 31 October 2026 at Dubai Harbour Cruise Terminal, Gate 3. Boarding starts at 7:00 PM and the yacht sails at 8:00 PM sharp." } },
+          { "@type": "Question", "name": "How much are tickets?", "acceptedAnswer": { "@type": "Answer", "text": "Tickets start from 100 AED and go up by phase. A VIP Table for 5 guests is 700 AED. Tickets are sold on unite.market." } },
+          { "@type": "Question", "name": "Who can come?", "acceptedAnswer": { "@type": "Answer", "text": "The party is for university students, 18+. Students from any university in Dubai are welcome." } },
+          { "@type": "Question", "name": "Do I need to bring ID?", "acceptedAnswer": { "@type": "Answer", "text": "Bring your ticket. If you're asked at boarding, a photo of your ID or passport on your phone is enough." } },
+          { "@type": "Question", "name": "Is there a dress code?", "acceptedAnswer": { "@type": "Answer", "text": "Halloween costumes are encouraged. Dress to scare." } },
+          { "@type": "Question", "name": "What happens if I'm late?", "acceptedAnswer": { "@type": "Answer", "text": "The yacht leaves at 8:00 PM sharp and can't wait, so be on board by then." } }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="/site.css" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="/theme.js"></script>
@@ -161,6 +206,37 @@
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- FAQ (the same answers are in the structured data in <head>) -->
+        <div>
+          <h2 class="text-lg font-bold tracking-tight">Questions</h2>
+          <div class="mt-3 divide-y divide-slate-200/70 overflow-hidden rounded-3xl bg-white text-sm shadow-sm ring-1 ring-slate-200/80 dark:divide-white/[0.07] dark:bg-[#1c1c1e] dark:shadow-none dark:ring-white/10">
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">When and where is it?<span aria-hidden="true" class="text-slate-400 transition-transform group-open:rotate-45">+</span></summary>
+            <p class="mt-2 text-slate-500 dark:text-slate-400">Saturday 31 October 2026 at Dubai Harbour Cruise Terminal, Gate 3. Boarding starts at 7:00 PM and the yacht sails at 8:00 PM sharp.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">How much are tickets?<span aria-hidden="true" class="text-slate-400 transition-transform group-open:rotate-45">+</span></summary>
+            <p class="mt-2 text-slate-500 dark:text-slate-400">From 100 AED, going up by phase. A VIP Table for 5 guests is 700 AED. A 10% booking fee is added at checkout.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">Who can come?<span aria-hidden="true" class="text-slate-400 transition-transform group-open:rotate-45">+</span></summary>
+            <p class="mt-2 text-slate-500 dark:text-slate-400">University students, 18+. Students from any university in Dubai are welcome.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">Do I need to bring ID?<span aria-hidden="true" class="text-slate-400 transition-transform group-open:rotate-45">+</span></summary>
+            <p class="mt-2 text-slate-500 dark:text-slate-400">Bring your ticket. If you're asked at boarding, a photo of your ID or passport on your phone is enough.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">Is there a dress code?<span aria-hidden="true" class="text-slate-400 transition-transform group-open:rotate-45">+</span></summary>
+            <p class="mt-2 text-slate-500 dark:text-slate-400">Halloween costumes are encouraged. Dress to scare.</p>
+          </details>
+          <details class="group p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">What if I'm late?<span aria-hidden="true" class="text-slate-400 transition-transform group-open:rotate-45">+</span></summary>
+            <p class="mt-2 text-slate-500 dark:text-slate-400">The yacht leaves at 8:00 PM sharp and can't wait, so be on board by then.</p>
+          </details>
           </div>
         </div>
 

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /door
+Disallow: /success
+Disallow: /api/
+
+Sitemap: https://unite.market/sitemap.xml
